@@ -1,0 +1,15 @@
+.container {
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+nav {
+    width: 2em;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+section {
+    margin-left: 2em;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>找不到網頁</title>
+
+  <!-- 引入 React 和 ReactDOM 的 CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- 引入 Babel 以便可以使用 JSX -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #5C6BBF;
+    }
+
+    a {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      color: #5C6BBF;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <!-- 编写 JSX 代码，React 会在这里渲染 -->
+  <script type="text/babel">
+    // 创建 404 页面组件
+    const NotFound = () => {
+      return (
+        <div>
+          <h1>找不到網頁QQ</h1>
+          <a href="/C-Tutorial-Website">返回首頁</a>
+        </div>
+      );
+    };
+
+    // 在 DOM 中渲染 NotFound 组件
+    ReactDOM.render(<NotFound />, document.getElementById('root'));
+  </script>
+</body>
+
+</html>
