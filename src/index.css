@@ -6,11 +6,17 @@
 
 body {
     margin: 0;
-    background-color: black;
+    background-color: white;
+    font-family: "Noto Sans TC", serif;
 }
 
-@media (prefers-color-scheme: light) {
+img {
+    -webkit-user-drag: none;
+}
+
+@media (prefers-color-scheme: dark) {
     body {
-        background-color: white;
+        background-color: black;
+        color: white;
     }
 }

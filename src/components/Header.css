@@ -1,4 +1,4 @@
-header {
+.logo {
     padding-left: 20%;
     padding-top: 1%;
     padding-bottom: 1%;
@@ -6,54 +6,62 @@ header {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    border-bottom: 0.1em solid black;
+}
+
+.logo img {
+    width: 3em;
+    height: 3em;
+}
+
+.logo p {
+    color: black;
+    font-weight: 600;
+    font-size: 2em;
+    margin: 0 0.2em;
+}
+
+ul.breadcrumb {
+    padding: 0.2em 20% 0.2em;
+    height: fit-content;
     background-color: black;
-    box-shadow: 0 2px 4px rgba(64, 64, 64, 1);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    list-style: none;
 }
 
-.logo {
-    position: relative;
-    width: 6em;
-    height: 6em;
-    clip-path: polygon(0 0, 0 6em, 6em 6em, 6em 0);
+ul.breadcrumb a {
+    text-decoration: none;
+    color: lightyellow;
 }
 
-img {
-    position: absolute;
+ul.breadcrumb li {
+    display: inline;
 }
 
-.wave {
-    position: absolute;
-    bottom: 0;
-    animation: wave 2s linear;
-    animation-iteration-count: infinite;
-    fill: rgb(192, 192, 192);
-}
-
-@keyframes wave {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
+ul.breadcrumb li+li::before {
+    content: '>';
+    color: white;
+    padding: 0 0.5em 0;
 }
 
 @media (max-width: 768px) {
-    header {
+    .logo {
         padding-left: 0%;
         flex-direction: column;
         justify-content: center;
     }
+
+    ul.breadcrumb {
+        padding-left: 5%;
+    }
 }
 
-@media (prefers-color-scheme: light) {
-    header {
-        border-bottom: 0.1em solid white;
-        background-color: white;
-        box-shadow: 0 2px 4px rgba(192, 192, 192, 1);
+@media (prefers-color-scheme: dark) {
+    .logo p {
+        color: white;
     }
-    .wave {
-        fill: rgb(64, 64, 64);
+
+    ul.breadcrumb {
+        background-color: rgb(32, 16, 0);
+        box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25);
     }
 }

@@ -1,24 +1,24 @@
 import Header from '../components/Header';
 import './Page.css'
 
-function Page() {
+function Page(props) {
+
+    const { pathList, children } = props
 
     return (
         <>
-            <div className='container'>
-                <header>
-                    <Header />
-                </header>
-                <nav>
-                    
-                </nav>
-                <section>
+            <Header pathList={pathList} />
+            <nav>
 
-                </section>
-                <footer>
+            </nav>
+            <section>
+                <div className='post-container'>
+                    {children}
+                </div>
+            </section>
+            <footer>
 
-                </footer>
-            </div>
+            </footer>
         </>
     );
 }
