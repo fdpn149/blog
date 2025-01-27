@@ -3,15 +3,15 @@ import {
     tomorrow,
     tomorrowNight,
 } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import Page from "../Page";
-import { useTheme } from "../../hooks/useTheme";
+import Page from "../../Page";
+import { useTheme } from "../../../hooks/useTheme";
 
 function ThemeColor() {
     const theme = useTheme();
 
     return (
         <>
-            <Page pathList={['Android輸入法開發', '主題顏色']}>
+            <Page pathList={['Android', 'App開發', '主題顏色']}>
                 <h1>主題顏色</h1>
                 <h2>color.xml</h2>
                 <ul>

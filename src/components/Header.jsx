@@ -4,8 +4,8 @@ import Logo from '/logo.svg'
 
 function Header({ pathList }) {
 
-    let pathLis = [<li key={-1}><a href='/#'>首頁</a></li>];
-    let accuPath = "/#"
+    let pathLis = [<li key={-1}><a href='/blog/#'>首頁</a></li>];
+    let accuPath = "/blog/#"
 
     for (let i = 0; i < pathList.length; i++) {
         accuPath += '/' + pathList[i];

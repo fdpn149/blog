@@ -8,15 +8,61 @@ body {
     margin: 0;
     background-color: white;
     font-family: "Noto Sans TC", serif;
+    font-size: 1.2em;
+    word-break: break-all;
+}
+
+code {
+    font-family: 'Cascadia Code', monospace;
+    font-size: 0.9em;
 }
 
 img {
     -webkit-user-drag: none;
 }
 
+.post-container {
+    margin-left: 14%;
+}
+
+.card-container {
+    padding-left: 14%;
+    padding-right: 14%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
 @media (prefers-color-scheme: dark) {
     body {
         background-color: black;
         color: white;
+    }
+        input {
+            background-color: black;
+            color: white;
+        }
+
+        textarea {
+            background-color: black;
+            color: white;
+        }
+}
+
+@media (max-width: 768px) {
+body {
+    font-size: 1em;
+}
+
+    .post-container {
+        margin-left: 5%;
+    }
+
+    .card-container {
+        padding-left: 0%;
+        padding-right: 0%;
+        flex-direction: column;
+        align-items: center;
     }
 }
