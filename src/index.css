@@ -34,26 +34,31 @@ img {
     justify-content: space-evenly;
 }
 
+.math {
+    overflow-x: auto;
+}
+
 @media (prefers-color-scheme: dark) {
     body {
         background-color: black;
         color: white;
     }
-        input {
-            background-color: black;
-            color: white;
-        }
 
-        textarea {
-            background-color: black;
-            color: white;
-        }
+    input {
+        background-color: black;
+        color: white;
+    }
+
+    textarea {
+        background-color: black;
+        color: white;
+    }
 }
 
 @media (max-width: 768px) {
-body {
-    font-size: 1em;
-}
+    body {
+        font-size: 1em;
+    }
 
     .post-container {
         margin-left: 5%;

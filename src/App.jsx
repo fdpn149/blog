@@ -11,10 +11,9 @@ import CustomComponent from './pages/Android/CreateApp/CustomComponent'
 import DataBinding from './pages/Android/CreateApp/DataBinding'
 import Math from './pages/Math'
 import Calculator from './pages/Math/Calculator'
-import QuaternionCalc from './pages/Math/Calculator/QuaternionCalc'
+import Quaternion from './pages/Math/Calculator/Quaternion'
 import IME_1 from './pages/Android/CreateApp/InputMethod/IME_1'
-import TrinionCalc from './pages/Math/Calculator/TrinionCalc'
-import RadixCalc from './pages/Math/Calculator/RadixCalc'
+import Radix from './pages/Math/Calculator/Radix'
 
 function App() {
 
@@ -52,9 +51,8 @@ function App() {
                                     <Route path='/計算機' element={<Calculator />} />
                                     <Route path='/計算機/*' element={
                                         <Routes>
-                                            <Route path='/四元數四則運算' element={<QuaternionCalc />} />
-                                            <Route path='/波峰三元數' element={<TrinionCalc />} />
-                                            <Route path='/進位制計算機' element={<RadixCalc />} />
+                                            <Route path='/四元數四則運算' element={<Quaternion />} />
+                                            <Route path='/進位制計算機' element={<Radix />} />
                                             <Route path='*' element={<NotFound />} />
                                         </Routes>
                                     } />

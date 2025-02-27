@@ -2,9 +2,9 @@ import Page from "../../Page";
 import { useTheme } from "../../../hooks/useTheme";
 import { useState } from "react";
 import { useEffect } from "react";
-import { calculate } from "../../../utils/Quaternion";
+import { calculate } from "../../../utils/QuaternionCalc";
 
-function QuaternionCalc() {
+function Quaternion() {
     const theme = useTheme();
     const [inputValue, setInputValue] = useState('');
     const [answer, setAnswer] = useState(0);
@@ -28,4 +28,4 @@ function QuaternionCalc() {
     );
 }
 
-export default QuaternionCalc;
+export default Quaternion;
