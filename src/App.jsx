@@ -21,48 +21,25 @@ function App() {
         <>
             <HashRouter>
                 <Routes>
-                    <Route path='/' element={<Home />} />
-                    <Route path='/*' element={
-                        <Routes>
-                            <Route path='/Android' element={<Android />} />
-                            <Route path='/Android/*' element={
-                                <Routes>
-                                    <Route path='/App開發' element={<CreateApp />} />
-                                    <Route path='/App開發/*' element={
-                                        <Routes>
-                                            <Route path='/主題顏色' element={<ThemeColor />} />
-                                            <Route path='/客製化元件' element={<CustomComponent />} />
-                                            <Route path='/資料單向綁定' element={<DataBinding />} />
-                                            <Route path='/輸入法' element={<InputMethod />} />
-                                            <Route path='/輸入法/*' element={
-                                                <Routes>
-                                                    <Route path='/前置作業' element={<IME_1 />} />
-                                                </Routes>
-                                            } />
-                                            <Route path='*' element={<NotFound />} />
-                                        </Routes>
-                                    } />
-                                    <Route path='*' element={<NotFound />} />
-                                </Routes>
-                            } />
-                            <Route path='/數學' element={<Math />} />
-                            <Route path='/數學/*' element={
-                                <Routes>
-                                    <Route path='/計算機' element={<Calculator />} />
-                                    <Route path='/計算機/*' element={
-                                        <Routes>
-                                            <Route path='/四元數四則運算' element={<Quaternion />} />
-                                            <Route path='/進位制計算機' element={<Radix />} />
-                                            <Route path='*' element={<NotFound />} />
-                                        </Routes>
-                                    } />
-                                    <Route path='*' element={<NotFound />} />
-                                </Routes>
-                            } />
-                            <Route path='*' element={<NotFound />} />
-                        </Routes>
-                    } />
-                    <Route path='*' element={<NotFound />} />
+                    <Route path="/" element={<Home />} />
+
+                    {/* Android 相關路由 */}
+                    <Route path="/Android" element={<Android />} />
+                    <Route path="/Android/App開發" element={<CreateApp />} />
+                    <Route path="/Android/App開發/主題顏色" element={<ThemeColor />} />
+                    <Route path="/Android/App開發/客製化元件" element={<CustomComponent />} />
+                    <Route path="/Android/App開發/資料單向綁定" element={<DataBinding />} />
+                    <Route path="/Android/App開發/輸入法" element={<InputMethod />} />
+                    <Route path="/Android/App開發/輸入法/前置作業" element={<IME_1 />} />
+
+                    {/* 數學相關路由 */}
+                    <Route path="/數學" element={<Math />} />
+                    <Route path="/數學/計算機" element={<Calculator />} />
+                    <Route path="/數學/計算機/四元數四則運算" element={<Quaternion />} />
+                    <Route path="/數學/計算機/進位制計算機" element={<Radix />} />
+
+                    {/* 所有未匹配路由導向 NotFound */}
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </HashRouter>
         </>

@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
 import { BlockMath, InlineMath } from 'react-katex';
-import 'react-katex/dist/katex.min.css';
 
 function RadixResultDisplay({ value }) {
     if (value["re"]["neg"] === '')
