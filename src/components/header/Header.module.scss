@@ -1,0 +1,38 @@
+$header-height: 80px;
+
+header {
+    width: 100%;
+    height: $header-height;
+    background-color: $background-color;
+    position: relative;
+
+    >h1 {
+        position: absolute;
+        top: 0;
+        left: 10vw;
+        line-height: $header-height;
+        color: $text-color;
+        // text-indent: -9999px;
+    }
+
+    >nav>ul {
+        position: absolute;
+        top: 0;
+        right: 10vw;
+        line-height: $header-height;
+
+        >li {
+            display: inline;
+            margin: 0 1rem;
+
+            >a {
+                color: $text-color;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

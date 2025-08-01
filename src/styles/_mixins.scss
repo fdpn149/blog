@@ -1,0 +1,14 @@
+@use '_variables' as var;
+@use 'sass:math';
+
+@function rhythm($size) {
+    @return math.ceil(math.div($size * 1.2, 1rem)) * 1rem;
+}
+
+@mixin font($level: 1) {
+    $size: $level * 1rem;
+    $line: rhythm($size);
+
+    font-size: $size;
+    line-height: $line;
+}

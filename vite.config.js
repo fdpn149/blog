@@ -1,8 +1,21 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
+import path from 'path';
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/blog/',
   plugins: [react()],
+  base: '/blog/',
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "@/styles/index.scss" as *;`,
+      },
+    },
+  },
 })

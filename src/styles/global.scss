@@ -1,0 +1,35 @@
+:root {
+  --background-color: #{$light-background-color};
+  --text-color: #{$light-text-color};
+}
+
+// 深色模式
+[data-theme='dark'] {
+  --background-color: #{$dark-background-color};
+  --text-color: #{$dark-text-color};
+}
+
+// 支援系統偏好設定
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --background-color: #{$dark-background-color};
+    --text-color: #{$dark-text-color};
+  }
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Noto Sans TC", sans-serif;
+  background-color: $background-color;
+  color: $text-color;
+  word-break: break-all;
+}
+
+img {
+    -webkit-user-drag: none;
+    max-width: 100%;
+}

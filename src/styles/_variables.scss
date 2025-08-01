@@ -1,0 +1,13 @@
+// 淺色模式變數
+$light-background-color: #ffffff;
+$light-text-color: #333333;
+
+// 深色模式變數
+$dark-background-color: #1a1a1a;
+$dark-text-color: #ffffff;
+
+// 共用變數（根據主題動態引用）
+$background-color: var(--background-color, $light-background-color);
+$text-color: var(--text-color, $light-text-color);
+
+$base-font-size: 1.2rem
