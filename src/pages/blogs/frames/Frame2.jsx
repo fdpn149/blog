@@ -1,16 +1,6 @@
-import styles from "@/pages/blogs/Blog.module.scss"
-import { useEffect } from "react"
-import { useRef } from "react"
+import Component from "@/utils/Component";
 
 function Frame2() {
-    const fram = useRef()
-
-    useEffect(() => {
-        if (fram.current)
-            fram.current.src = "/#/f1"
-    }, [])
-
-
     return <details>
         <summary><h3>什麼是十進制</h3></summary>
         <p>不知道大家國小數學課時，有沒有玩過這種由積木和百格板所組成的數學教材</p>
@@ -23,12 +13,14 @@ function Frame2() {
             <li>0~9個百格板組合出百位數</li>
         </ul>
         <p>舉例來說如以下圖片</p>
-        <div className={styles.dualDiv}>
+        <div className='dualDiv'>
             <img src="https://img.youtube.com/vi/CdZfDwIoiVo/0.jpg" style={{ objectFit: 'cover', objectPosition: 'top', aspectRatio: '1.6' }} />
             <img src="https://img.youtube.com/vi/REifITjP9fI/0.jpg" style={{ objectFit: 'cover', objectPosition: 'top', aspectRatio: '1.6' }} />
         </div>
         <p>我們可以輕易地用這些積木就能組合出0~999的整數，並且立方體的總數就等同實際的數值</p>
-        <iframe ref={fram} />
+        <div style={{ border: '1px solid #ccc', margin: '10px', padding: '10px' }}>
+            <Component props={{ path: "/blogs/Blog1", component: "Frame1" }} />
+        </div>
     </details>
 }
 

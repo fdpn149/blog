@@ -1,22 +1,14 @@
-import { HashRouter, Route, Routes } from 'react-router-dom'
 import { Suspense } from 'react'
-import Home from '@/pages/Home/Home'
-import Blog1 from './pages/blogs/Blog1'
-import Blog2 from './pages/blogs/Blog2'
-import Frame1 from './pages/blogs/frames/Frame1'
-import Frame2 from './pages/blogs/frames/Frame2'
+import { HashRouter, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home/Home'
+import Component from './utils/Component'
 
 function App() {
   return <HashRouter>
-    <Suspense fallback={<div>Loading...</div>}>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/1' element={<Blog1 />} />
-        <Route path='/2' element={<Blog2 />} />
-        <Route path='/f1' element={<Frame1 />} />
-        <Route path='/f2' element={<Frame2 />} />
-      </Routes>
-    </Suspense>
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='*' element={<Component />} />
+    </Routes>
   </HashRouter>
 }
 

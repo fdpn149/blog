@@ -1,4 +1,3 @@
-import styles from "@/pages/blogs/Blog.module.scss"
 
 function Frame1() {
     return <details>
