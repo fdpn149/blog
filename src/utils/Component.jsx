@@ -7,7 +7,10 @@ export default function Component({ props }) {
     const [loading, setLoading] = useState(false);
     const [Content, setContent] = useState(null);
 
-    let pathname = (props && props.path) ? props.path : useLocation().pathname;
+    let pathname = (props && props.path) ?
+        props.path : decodeURIComponent(useLocation().pathname);
+
+    console.log(pathname);
 
     function getContent(page) {
         if (!props || !props.component)
@@ -23,13 +26,14 @@ export default function Component({ props }) {
         try {
             setLoading(true);
             let page;
-            switch (path.length - 1) {
+            const offset = 1;
+            switch (path.length - offset) {
                 case 2:
-                    page = await import(`@/pages/${path[1]}/${path[2]}.jsx`);
+                    page = await import(`@/pages/${path[offset]}/${path[offset+1]}.jsx`);
                     break;
 
                 case 3:
-                    page = await import(`@/pages/${path[1]}/${path[2]}/${path[3]}.jsx`);
+                    page = await import(`@/pages/${path[offset]}/${path[offset+1]}/${path[3]}.jsx`);
                     break;
 
                 default:

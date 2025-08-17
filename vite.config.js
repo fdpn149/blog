@@ -5,6 +5,9 @@ import path from 'path';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  define: {
+    global: 'globalThis', // 這行是關鍵
+  },
   base: '/blog/',
   resolve: {
     alias: {

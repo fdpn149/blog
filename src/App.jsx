@@ -1,15 +1,14 @@
-import { Suspense } from 'react'
-import { HashRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home/Home'
 import Component from './utils/Component'
 
 function App() {
-  return <HashRouter>
+  return <BrowserRouter basename='blog'>
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path='*' element={<Component />} />
     </Routes>
-  </HashRouter>
+  </BrowserRouter>
 }
 
 export default App

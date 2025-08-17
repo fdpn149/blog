@@ -1,12 +1,14 @@
-import './Header.scss'
+import styles from './Header.module.scss'
+import { Link } from 'react-router-dom'
 
 function Header() {
-    return (<header>
+    return (<header className={styles.header}>
+        <button className={styles.menu}>&#9776;</button>
         <h1>波峰的小棧</h1>
         <nav>
             <ul>
-                <li><a href='#'>首頁</a></li>
-                <li><a href='#'>關於</a></li>
+                <li><Link to='/'>首頁</Link></li>
+                <li><Link to='/'>關於</Link></li>
             </ul>
         </nav>
     </header>)

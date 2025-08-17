@@ -1,12 +1,14 @@
 :root {
   --background-color: #{$light-background-color};
   --text-color: #{$light-text-color};
+  --shadow-color: #{$light-shadow-color};
 }
 
 // 深色模式
 [data-theme='dark'] {
   --background-color: #{$dark-background-color};
   --text-color: #{$dark-text-color};
+  --shadow-color: #{$dark-shadow-color};
 }
 
 // 支援系統偏好設定
@@ -14,15 +16,19 @@
   :root:not([data-theme='light']) {
     --background-color: #{$dark-background-color};
     --text-color: #{$dark-text-color};
+    --shadow-color: #{$dark-shadow-color};
   }
 }
 
 * {
   padding: 0;
   margin: 0;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-  box-sizing: border-box;         /* Opera/IE 8+ */
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
 }
 
 body {
@@ -33,6 +39,14 @@ body {
 }
 
 img {
-    -webkit-user-drag: none;
-    max-width: 100%;
+  -webkit-user-drag: none;
+  max-width: 100%;
+}
+
+h2 {
+  @include font(2);
+}
+
+h3 {
+  @include font(1.6);
 }

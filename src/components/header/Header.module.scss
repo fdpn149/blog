@@ -1,10 +1,24 @@
 $header-height: 80px;
 
-header {
+.header {
     width: 100%;
     height: $header-height;
     background-color: $background-color;
     position: relative;
+
+    box-shadow: $shadow-color 0 -1em 1em 1em inset;
+
+    .menu {
+        display: none;
+        background-color: transparent;
+        color: $text-color;
+        @include font(1.6);
+        position: absolute;
+        top: 0;
+        left: 1rem;
+        line-height: $header-height;
+        border: none;
+    }
 
     >h1 {
         position: absolute;
@@ -33,6 +47,21 @@ header {
                     text-decoration: underline;
                 }
             }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .menu {
+            display: block;
+        }
+
+        >h1 {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        >nav {
+            display: none;
         }
     }
 }
