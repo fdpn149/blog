@@ -33,7 +33,7 @@ export default function Component({ props }) {
                     break;
 
                 case 3:
-                    page = await import(`@/pages/${path[offset]}/${path[offset+1]}/${path[3]}.jsx`);
+                    page = await import(`@/pages/${path[offset]}/${path[offset+1]}/${path[offset+2]}.jsx`);
                     break;
 
                 default:

@@ -3,6 +3,10 @@ import Plot from 'react-plotly.js';
 import { range, complex, sin, abs, arg, pi, unit } from 'mathjs';
 import Header from '@/components/header/Header';
 import Footer from '@/components/footer/Footer';
+import { exp } from 'mathjs';
+import { divide } from 'mathjs';
+import { i } from 'mathjs';
+import { multiply } from 'mathjs';
 
 const ComplexPlot = () => {
     const [angleDeg, setAngleDeg] = useState(0);
@@ -41,8 +45,7 @@ const ComplexPlot = () => {
                 <h2>y∠c = sin(x∠θ)</h2>
                 <p>{"0° ≤ c(color hue) < 360°"}</p>
                 <br/>
-                <div style={{ width: '90%', margin: 'auto' }}>
-                    <label>
+                <label>
                         θ (deg): {angleDeg.toFixed(1)}
                         <input
                             type="range"
@@ -54,7 +57,7 @@ const ComplexPlot = () => {
                             style={{ width: '100%' }}
                         />
                     </label>
-
+                <div style={{ width: '90%', margin: 'auto', overflow: 'scroll'}}>
                     <Plot
                         data={plotData}
                         layout={{

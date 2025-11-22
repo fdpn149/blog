@@ -6,7 +6,7 @@ function Home() {
             <Header />
             <main>
                 <section>
-                    123
+                    
                 </section>
             </main>
             <footer></footer>

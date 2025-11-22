@@ -1,4 +1,4 @@
-import styles from "@/pages/tutorials/Blog.module.scss"
+import styles from "@/pages/Blog.module.scss"
 import Footer from "@/components/footer/Footer";
 import Header from "@/components/header/Header";
 import Component from "@/utils/Component";
