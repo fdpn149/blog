@@ -1,0 +1,1 @@
+import{j as t}from"./index-DYeXyydy.js";import{c as a,S as o,G as e,C as n}from"./Stage-C1hB7jNC.js";import{CameraProvider as s}from"./Camera-BdkyP5-S.js";import"./pureFunctionsAny.generated-Db_ZyAOv.js";function i(r){Object.assign(a,r)}i({Container:n,Graphics:e});function u(){return t.jsx(s,{children:t.jsx(o,{})})}export{u as default};
