@@ -73,7 +73,7 @@ $header-height: 80px;
     padding: 0.2em 14% 0.2em;
     height: fit-content;
     background-color: black;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 4px $strong-shadow-color;
     list-style: none;
 }
 
@@ -112,6 +112,6 @@ $header-height: 80px;
 
     .breadcrumb {
         background-color: rgb(32, 16, 0);
-        box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25);
+        // box-shadow handled by $strong-shadow-color variable
     }
 }

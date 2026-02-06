@@ -2,15 +2,18 @@
 $light-background-color: #ffffff;
 $light-text-color: #333333;
 $light-shadow-color: rgba(0, 0, 0, 0.05);
+$light-strong-shadow-color: rgba(0, 0, 0, 0.25);
 
 // 深色模式變數
 $dark-background-color: #1a1a1a;
 $dark-text-color: #ffffff;
 $dark-shadow-color: rgba(255, 255, 255, 0.05);
+$dark-strong-shadow-color: rgba(255, 255, 255, 0.25);
 
 // 共用變數（根據主題動態引用）
 $background-color: var(--background-color, $light-background-color);
 $text-color: var(--text-color, $light-text-color);
 $shadow-color: var(--shadow-color, $light-shadow-color);
+$strong-shadow-color: var(--strong-shadow-color, $light-strong-shadow-color);
 
 $base-font-size: 1.2rem

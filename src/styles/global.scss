@@ -2,6 +2,7 @@
   --background-color: #{$light-background-color};
   --text-color: #{$light-text-color};
   --shadow-color: #{$light-shadow-color};
+  --strong-shadow-color: #{$light-strong-shadow-color};
 }
 
 // 深色模式
@@ -9,6 +10,7 @@
   --background-color: #{$dark-background-color};
   --text-color: #{$dark-text-color};
   --shadow-color: #{$dark-shadow-color};
+  --strong-shadow-color: #{$dark-strong-shadow-color};
 }
 
 // 支援系統偏好設定
@@ -17,6 +19,7 @@
     --background-color: #{$dark-background-color};
     --text-color: #{$dark-text-color};
     --shadow-color: #{$dark-shadow-color};
+    --strong-shadow-color: #{$dark-strong-shadow-color};
   }
 }
 
