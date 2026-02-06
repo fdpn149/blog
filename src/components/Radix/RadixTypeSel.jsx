@@ -1,4 +1,4 @@
-import "./RadixTypeSel.css"
+import styles from "./RadixTypeSel.module.scss"
 import Select from "react-select";
 import { useTheme } from "@/hooks/useTheme";
 
@@ -83,7 +83,7 @@ function RadixTypeSel({ setRadixType }) {
 
     return (
         <>
-            <Select className="select" styles={colourStyles} options={options} onChange={(item) => { setRadixType(item.value); }} />
+            <Select className={styles.select} styles={colourStyles} options={options} onChange={(item) => { setRadixType(item.value); }} />
         </>
     );
 }
