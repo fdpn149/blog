@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-export default function Image({ path, style }) {
+export default function Image({ path, style, alt }) {
     const [loading, setLoading] = useState(false);
     const [image, setImage] = useState(null);
 
@@ -17,6 +17,14 @@ export default function Image({ path, style }) {
 
                 case 3:
                     response = await import(`@/assets/images/${pathSplit[offset]}/${pathSplit[offset + 1]}/${pathSplit[offset + 2]}.png`);
+                    break;
+
+                case 4:
+                    response = await import(`@/assets/images/${pathSplit[offset]}/${pathSplit[offset + 1]}/${pathSplit[offset + 2]}/${pathSplit[offset + 3]}.png`);
+                    break;
+
+                case 5:
+                    response = await import(`@/assets/images/${pathSplit[offset]}/${pathSplit[offset + 1]}/${pathSplit[offset + 2]}/${pathSplit[offset + 3]}/${pathSplit[offset + 4]}.png`);
                     break;
 
                 default:
@@ -41,7 +49,7 @@ export default function Image({ path, style }) {
     return (
         <>
             {loading && <div>載入中...</div>}
-            {image && <img src={image} style={style} />}
+            {image && <img src={image} style={style} alt={alt} />}
         </>
     );
 };

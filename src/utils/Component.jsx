@@ -29,11 +29,19 @@ export default function Component({ props }) {
             const offset = 1;
             switch (path.length - offset) {
                 case 2:
-                    page = await import(`@/pages/${path[offset]}/${path[offset+1]}.jsx`);
+                    page = await import(`@/pages/${path[offset]}/${path[offset + 1]}.jsx`);
                     break;
 
                 case 3:
-                    page = await import(`@/pages/${path[offset]}/${path[offset+1]}/${path[offset+2]}.jsx`);
+                    page = await import(`@/pages/${path[offset]}/${path[offset + 1]}/${path[offset + 2]}.jsx`);
+                    break;
+
+                case 4:
+                    page = await import(`@/pages/${path[offset]}/${path[offset + 1]}/${path[offset + 2]}/${path[offset + 3]}.jsx`);
+                    break;
+
+                case 5:
+                    page = await import(`@/pages/${path[offset]}/${path[offset + 1]}/${path[offset + 2]}/${path[offset + 3]}/${path[offset + 4]}.jsx`);
                     break;
 
                 default:

@@ -1,0 +1,47 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2em 2em 2em 0;
+    width: min(43%, 16em);
+    overflow: hidden;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 2em;
+    transition-duration: 0.3s;
+}
+
+.card:hover {
+    scale: 1.1;
+    cursor: pointer;
+}
+
+.card img {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 1.78;
+    object-fit: cover;
+}
+
+.card p {
+    color: black;
+    font-size: 1.5em;
+}
+
+@media (max-width: 768px) {
+    .card {
+        margin-right: 0;
+        width: min(60%, 14em);
+        aspect-ratio: 1;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .card {
+        box-shadow: 4px 4px 4px rgba(255, 255, 255, 0.25);
+    }
+
+    .card p {
+        color: white;
+    }
+}
