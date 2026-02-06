@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-export default function Image({ path, style }) {
+export default function Image({ path, style, className, alt }) {
     const [loading, setLoading] = useState(false);
     const [image, setImage] = useState(null);
 
@@ -20,7 +20,7 @@ export default function Image({ path, style }) {
                     break;
 
                 default:
-                    throw ("Image Not Found");
+                    throw (`Image Not Found\n${path}`);
             }
             setImage(response.default);
         }
@@ -41,7 +41,7 @@ export default function Image({ path, style }) {
     return (
         <>
             {loading && <div>載入中...</div>}
-            {image && <img src={image} style={style} />}
+            {image && <img src={image} className={className} style={style} alt={alt} loading="lazy" decoding="async"/>}
         </>
     );
 };
