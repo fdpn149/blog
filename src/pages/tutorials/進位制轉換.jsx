@@ -1,7 +1,7 @@
 import styles from "@/pages/Blog.module.scss"
 import Footer from "@/components/footer/Footer";
 import Header from "@/components/header/Header";
-import Component from "@/utils/Component";
+import DynamicRouter from "@/components/router/DynamicRouter"
 
 export function Frame1() {
     return <details>

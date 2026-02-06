@@ -1,7 +1,7 @@
-import Component from "@/utils/Component";
+import DynamicRouter from "@/components/router/DynamicRouter";
 
 function Page() {
-    return <Component props={{ path: '/tutorials/進位制轉換' }} />
+    return <DynamicRouter props={{ path: '/tutorials/進位制轉換' }} />
 }
 
 export default Page;

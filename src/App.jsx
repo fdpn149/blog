@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
-import Component from './utils/Component'
+import DynamicRouter from '@/components/router/DynamicRouter'
 
 function App() {
   return <BrowserRouter basename='blog'>
     <Routes>
       <Route path='/' element={<Home />} />
-      <Route path='*' element={<Component />} />
+      <Route path='*' element={<DynamicRouter />} />
     </Routes>
   </BrowserRouter>
 }

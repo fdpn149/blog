@@ -1,7 +1,7 @@
 import styles from "@/pages/Blog.module.scss"
 import Footer from "@/components/footer/Footer";
 import Header from "@/components/header/Header";
-import Image from "@/utils/Image"
+import Image from "@/components/common/Image"
 import SyntaxHighlighter from "react-syntax-highlighter";
 import {
     tomorrow,
@@ -20,7 +20,7 @@ function Page() {
                 <h3>建立元件layout</h3>
                 <ul>
                     <li>於res/layout中，建立一個layout<br />
-                        <Image path='/tutorials/Android/App開發/客製化元件/component_xml' alt="想要元件的layout" />
+                        <Image path='/tutorials/Android/App開發/客製化元件/component_xml.png' alt="想要元件的layout" />
                         {/* <Image path='/notes/多媒體/6' style={{ 'maxHeight': '12rem' }} /> */}
                         {/* <img src={component_xml} alt="想要元件的layout" /> */}
                         <ul>
@@ -66,7 +66,7 @@ function Page() {
                     </li>
                 </ul>
                 <h3>建立對應的kt</h3>
-                <Image path='/tutorials/Android/App開發/客製化元件/kt' alt="SwipeButton.kt" />
+                <Image path='/tutorials/Android/App開發/客製化元件/kt.png' alt="SwipeButton.kt" />
                 {/* <img src={kt} alt='SwipeButton.kt' /> */}
                 <ul>
                     <li>名稱任意

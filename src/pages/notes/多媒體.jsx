@@ -1,7 +1,7 @@
 import Footer from "@/components/footer/Footer"
 import Header from "@/components/header/Header"
 import styles from "@/pages/Blog.module.scss"
-import Image from "@/utils/Image"
+import Image from "@/components/common/Image"
 
 export default function Page() {
     return <>
@@ -20,7 +20,7 @@ export default function Page() {
                             <li>將類比的資料以一定的(時間、像素)間隔進行取值，將資料離散化</li>
                             <li>平滑的圖案會變成一格一格的</li>
                         </ul>
-                        <Image path='/notes/多媒體/1' style={{ 'maxWidth': 'min(100%, 20rem)' }} />
+                        <Image path='/notes/多媒體/1.png' style={{ 'maxWidth': 'min(100%, 20rem)' }} />
                     </details>
                     <details>
                         <summary><h3>Quantization</h3></summary>
@@ -33,8 +33,8 @@ export default function Page() {
                                 </ol>
                             </li>
                         </ul>
-                        <Image path='/notes/多媒體/2' style={{ 'maxWidth': 'min(100%, 20rem)' }} />
-                        <Image path='/notes/多媒體/3' style={{ 'maxWidth': 'min(100%, 20rem)' }} />
+                        <Image path='/notes/多媒體/2.png' style={{ 'maxWidth': 'min(100%, 20rem)' }} />
+                        <Image path='/notes/多媒體/3.png' style={{ 'maxWidth': 'min(100%, 20rem)' }} />
                     </details>
                 </details>
                 <details>
@@ -44,11 +44,11 @@ export default function Page() {
                         <li>眼睛有視錐與視桿兩種細胞</li>
                         <li>眼睛視網膜對顏色的敏感度：G:R:B=4:2:1
                             <br />
-                            <Image path='/notes/多媒體/4' style={{ 'maxWidth': 'min(100%, 10rem)' }} />
+                            <Image path='/notes/多媒體/4.png' style={{ 'maxWidth': 'min(100%, 10rem)' }} />
                         </li>
                         <li>三種視錐細胞(receptors) 在不同的波長，會受到不同的刺激
                             <br />
-                            <Image path='/notes/多媒體/5' style={{ 'maxWidth': 'min(100%, 20rem)' }} />
+                            <Image path='/notes/多媒體/5.png' style={{ 'maxWidth': 'min(100%, 20rem)' }} />
                             <ul>
                                 <li>視錐細胞中，藍光對短波長比較敏感，紅光對長波長比較敏感</li>
                             </ul>
@@ -61,14 +61,14 @@ export default function Page() {
                     <ul>
                         <li>彩色影像由3個不唯一的bands組成</li>
                     </ul>
-                    <Image path='/notes/多媒體/6' style={{ 'maxHeight': '12rem' }} />
-                    <Image path='/notes/多媒體/7' style={{ 'maxHeight': '12rem' }} />
+                    <Image path='/notes/多媒體/6.png' style={{ 'maxHeight': '12rem' }} />
+                    <Image path='/notes/多媒體/7.png' style={{ 'maxHeight': '12rem' }} />
                     <details>
                         <summary><h3>RGB & CMYK</h3></summary>
                         <details>
                             <summary><h3>RGB</h3></summary>
-                            <Image path='/notes/多媒體/8' style={{ 'maxWidth': 'min(100%, 15rem)' }} />
-                            <Image path='/notes/多媒體/9' style={{ 'maxWidth': 'min(100%, 15rem)' }} />
+                            <Image path='/notes/多媒體/8.png' style={{ 'maxWidth': 'min(100%, 15rem)' }} />
+                            <Image path='/notes/多媒體/9.png' style={{ 'maxWidth': 'min(100%, 15rem)' }} />
                             <ul>
                                 <li>顏色疊加(加色法、加法混色)→越來越亮
                                     <ul>
