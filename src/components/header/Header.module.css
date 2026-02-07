@@ -1,0 +1,77 @@
+@reference "../../index.css";
+
+.header {
+    @apply w-full h-[80px] bg-[var(--background-color)] relative shadow-md shadow-[var(--shadow-color)];
+
+    .menu {
+        @apply hidden bg-transparent text-[var(--text-color)] text-2xl absolute top-0 left-4 leading-[80px] border-none md:hidden;
+    }
+
+    >h1 {
+        @apply absolute top-0 left-[10vw] leading-[80px] text-[var(--text-color)];
+        /* text-indent: -9999px; */
+    }
+
+    >nav>ul {
+        @apply absolute top-0 right-[10vw] leading-[80px];
+
+        >li {
+            @apply inline mx-4;
+
+            >a {
+                @apply text-[var(--text-color)] no-underline hover:underline;
+            }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .menu {
+            @apply block;
+        }
+
+        >h1 {
+            @apply left-1/2 -translate-x-1/2;
+        }
+
+        >nav {
+            @apply hidden;
+        }
+    }
+}
+
+.breadcrumb {
+    @apply relative py-1 px-[14%] h-fit bg-black shadow-md shadow-[var(--strong-shadow-color)] list-none;
+}
+
+.breadcrumb a {
+    @apply no-underline text-yellow-100;
+}
+
+.breadcrumb li {
+    @apply inline;
+}
+
+.breadcrumb li+li::before {
+    content: '>';
+    @apply text-white px-2;
+}
+
+@media (max-width: 768px) {
+    .logo {
+        @apply pl-0 flex-col justify-center;
+    }
+
+    .breadcrumb {
+        @apply px-[5%];
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .logo p {
+        @apply text-white;
+    }
+
+    .breadcrumb {
+        @apply bg-[#201000];
+    }
+}

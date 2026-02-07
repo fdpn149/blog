@@ -1,0 +1,23 @@
+@reference "../../index.css";
+
+.card {
+    @apply flex flex-col justify-between items-center m-[2em_2em_2em_0] overflow-hidden rounded-[2em] transition-all duration-300 shadow-[0_4px_20px_var(--shadow-color)];
+    width: min(43%, 16em);
+
+    &:hover {
+        @apply scale-110 cursor-pointer shadow-[0_4px_30px_var(--strong-shadow-color)];
+    }
+
+    img {
+        @apply w-full max-w-full aspect-video object-cover;
+    }
+
+    p {
+        @apply text-[var(--text-color)] text-2xl;
+    }
+
+    @media (max-width: 768px) {
+        @apply mr-0 aspect-square;
+        width: min(60%, 14em);
+    }
+}

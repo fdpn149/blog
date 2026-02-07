@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@theme {
+    --color-theme-bg: var(--background-color);
+    --color-theme-text: var(--text-color);
+    --color-theme-shadow: var(--shadow-color);
+    --color-theme-shadow-strong: var(--strong-shadow-color);
+}
+
 /* Custom Scrollbar for the map container */
 .metro-scroll::-webkit-scrollbar {
     width: 6px;

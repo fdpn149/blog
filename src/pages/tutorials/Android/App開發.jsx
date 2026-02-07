@@ -152,7 +152,7 @@ function Page() {
 
     return (
         // Apply 'dark' class if theme is dark
-        <div className={`flex flex-col h-screen overflow-hidden font-sans ${theme === 'dark' ? 'dark' : ''} bg-slate-50 dark:bg-slate-950 transition-colors duration-300`}>
+        <div className={`flex flex-col h-screen overflow-hidden font-sans ${theme === 'dark' ? 'dark' : ''} bg-[var(--background-color)] text-[var(--text-color)] transition-colors duration-300`}>
             <Header />
             {/* Mobile Header (Only visible on mobile, distinct from global header) */}
             <div className="md:hidden flex items-center justify-between p-4 bg-white dark:bg-[#1a1a1a] border-b border-gray-200 dark:border-gray-800 z-50">
@@ -197,7 +197,7 @@ function Page() {
                 </aside>
 
                 {/* Right Content Area */}
-                <section className="flex-1 h-full min-w-0 p-0 overflow-hidden relative bg-slate-50 dark:bg-slate-950">
+                <section className="flex-1 h-full min-w-0 p-0 overflow-hidden relative bg-[var(--background-color)]">
                     {/* Background Decorative Pattern */}
                     <div className="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none"
                         style={{
