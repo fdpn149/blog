@@ -4,16 +4,37 @@ $light-text-color: #333333;
 $light-shadow-color: rgba(0, 0, 0, 0.05);
 $light-strong-shadow-color: rgba(0, 0, 0, 0.25);
 
+// New Light Variables
+$light-border-color: #e5e7eb;
+$light-muted-text-color: #6b7280;
+$light-sidebar-bg-color: #ffffff;
+$light-hover-bg-color: #f3f4f6;
+$light-secondary-bg-color: #ffffff;
+
 // 深色模式變數
 $dark-background-color: #1a1a1a;
 $dark-text-color: #ffffff;
 $dark-shadow-color: rgba(255, 255, 255, 0.05);
 $dark-strong-shadow-color: rgba(255, 255, 255, 0.25);
 
+// New Dark Variables
+$dark-border-color: #374151;
+$dark-muted-text-color: #9ca3af;
+$dark-sidebar-bg-color: #1f2937;
+$dark-hover-bg-color: #374151;
+$dark-secondary-bg-color: #1f2937;
+
 // 共用變數（根據主題動態引用）
 $background-color: var(--background-color, $light-background-color);
 $text-color: var(--text-color, $light-text-color);
 $shadow-color: var(--shadow-color, $light-shadow-color);
 $strong-shadow-color: var(--strong-shadow-color, $light-strong-shadow-color);
+
+// New Metro/Theme Variables
+$border-color: var(--border-color, #e5e7eb);
+$muted-text-color: var(--muted-text-color, #6b7280);
+$sidebar-bg-color: var(--sidebar-bg-color, #ffffff);
+$hover-bg-color: var(--hover-bg-color, #f3f4f6);
+$secondary-bg-color: var(--secondary-bg-color, #ffffff); // For cards/panels
 
 $base-font-size: 1.2rem

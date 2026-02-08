@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles.css';
+import './styles.scss';
 
 // StationType enum equivalent
 export const StationType = {

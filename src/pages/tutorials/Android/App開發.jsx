@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react';
 
 import MetroMap from '@/components/metro/MetroMap';
 import ContentPanel from '@/components/metro/ContentPanel';
-import '@/components/metro/styles.css';
+import '@/components/metro/styles.scss';
 
 import { ROUTES, ANDROID_ROUTE } from './data';
 import { StationType } from '@/components/metro/StationNode';

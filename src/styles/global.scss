@@ -3,6 +3,11 @@
   --text-color: #{$light-text-color};
   --shadow-color: #{$light-shadow-color};
   --strong-shadow-color: #{$light-strong-shadow-color};
+  --border-color: #{$light-border-color};
+  --muted-text-color: #{$light-muted-text-color};
+  --sidebar-bg-color: #{$light-sidebar-bg-color};
+  --hover-bg-color: #{$light-hover-bg-color};
+  --secondary-bg-color: #{$light-secondary-bg-color};
 }
 
 // 深色模式
@@ -11,6 +16,11 @@
   --text-color: #{$dark-text-color};
   --shadow-color: #{$dark-shadow-color};
   --strong-shadow-color: #{$dark-strong-shadow-color};
+  --border-color: #{$dark-border-color};
+  --muted-text-color: #{$dark-muted-text-color};
+  --sidebar-bg-color: #{$dark-sidebar-bg-color};
+  --hover-bg-color: #{$dark-hover-bg-color};
+  --secondary-bg-color: #{$dark-secondary-bg-color};
 }
 
 // 支援系統偏好設定
@@ -20,6 +30,11 @@
     --text-color: #{$dark-text-color};
     --shadow-color: #{$dark-shadow-color};
     --strong-shadow-color: #{$dark-strong-shadow-color};
+    --border-color: #{$dark-border-color};
+    --muted-text-color: #{$dark-muted-text-color};
+    --sidebar-bg-color: #{$dark-sidebar-bg-color};
+    --hover-bg-color: #{$dark-hover-bg-color};
+    --secondary-bg-color: #{$dark-secondary-bg-color};
   }
 }
 
