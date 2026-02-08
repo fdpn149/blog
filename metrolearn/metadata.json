@@ -1,0 +1,5 @@
+{
+  "name": "MetroLearn",
+  "description": "An educational platform using a subway map metaphor for course navigation, featuring AI-powered lesson tutoring.",
+  "requestFramePermissions": []
+}
