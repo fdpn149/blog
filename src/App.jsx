@@ -6,6 +6,7 @@ function App() {
   return <BrowserRouter basename='blog'>
     <Routes>
       <Route path='/' element={<Home />} />
+      <Route path='/tutorials/Android/App開發/*' element={<DynamicRouter props={{ path: '/tutorials/Android/App開發' }} />} />
       <Route path='*' element={<DynamicRouter />} />
     </Routes>
   </BrowserRouter>

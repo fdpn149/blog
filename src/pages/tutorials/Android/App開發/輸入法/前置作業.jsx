@@ -1,6 +1,3 @@
-import styles from "@/pages/Blog.module.scss"
-import Footer from "@/components/footer/Footer";
-import Header from "@/components/header/Header";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import {
     tomorrow,
@@ -12,9 +9,7 @@ function Page() {
     const theme = useTheme();
 
     return <>
-        <Header />
-        <main className={styles.main}>
-            <h2>前置作業</h2>
+        <div>
             <section>
                 <h3>建立專案</h3>
                 <ul>
@@ -88,8 +83,7 @@ function Page() {
                     <li>到手機設定中語言與鍵盤底下，在輸入法的地方應該就能找到我們剛建立的輸入法，可以將它打開，不過目前還沒有功能</li>
                 </ul>
             </section>
-        </main>
-        <Footer />
+        </div>
     </>
 }
 

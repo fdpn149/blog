@@ -49,10 +49,11 @@ export const ANDROID_ROUTE = {
         },
         {
             id: 'android_input',
-            title: '三線轉乘站',
-            description: '可轉乘至「輸入法」或「Kotlin」路線。',
+            title: '輸入法',
+            description: '實作一個屬於自己的 Android 輸入法。',
             type: StationType.INTERCHANGE,
             moduleId: 'module-android',
+            link: '/tutorials/Android/App開發/輸入法',
             connectedRoutes: CONNECTIONS
         }
     ]
@@ -66,10 +67,11 @@ export const INPUT_ROUTE = {
     stations: [
         {
             id: 'input_hub',
-            title: 'App開發轉乘站',
-            description: '返回 App 開發主線或前往 Kotlin 路線。',
+            title: '輸入法簡介',
+            description: '輸入法框架簡介與實作準備。',
             type: StationType.INTERCHANGE,
             moduleId: 'module-input',
+            link: '/tutorials/Android/App開發/輸入法',
             connectedRoutes: CONNECTIONS
         },
         {
@@ -95,6 +97,7 @@ export const KOTLIN_ROUTE = {
             description: '連結 Android 開發與輸入法專題。',
             type: StationType.INTERCHANGE,
             moduleId: 'module-kotlin',
+            link: '/tutorials/Android/App開發/輸入法',
             connectedRoutes: CONNECTIONS
         },
         {

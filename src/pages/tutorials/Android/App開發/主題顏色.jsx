@@ -1,6 +1,3 @@
-import styles from "@/pages/Blog.module.scss"
-import Footer from "@/components/footer/Footer";
-import Header from "@/components/header/Header";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import {
     tomorrow,
@@ -12,9 +9,7 @@ function Page() {
     const theme = useTheme();
 
     return <>
-        <Header />
-        <main className={styles.main}>
-            <h2>主題顏色</h2>
+        <div>
             <section>
                 <h3>color.xml</h3>
                 <ul>
@@ -69,8 +64,7 @@ function Page() {
                     </li>
                 </ul>
             </section>
-        </main>
-        <Footer />
+        </div>
     </>
 }
 

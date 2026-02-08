@@ -1,21 +1,8 @@
-import Header from "@/components/header/Header";
-import Card from "@/components/card/Card";
-import { useNavigate } from 'react-router-dom';
-
 function Page() {
-    const navigate = useNavigate();
     return (
-        <>
-            <Header />
-            <main>
-                <section>
-                    <div className='card-container'>
-                        <Card handleClick={() => { navigate('/tutorials/Android/App開發/輸入法/前置作業') }} imgSrc='https://cdn.pixabay.com/photo/2021/02/04/12/04/keyboard-5981126_960_720.jpg' title='前置作業' />
-                    </div>
-                </section>
-            </main>
-            <footer></footer>
-        </>
+        <section>
+            <p>輸入法是手機中不可或缺的一環，但你是否曾想過，我們每天都在使用的輸入法，究竟是如何運作的呢？因此我將帶領大家一步一步實作一個屬於自己的輸入法。</p>
+        </section>
     )
 }
 
