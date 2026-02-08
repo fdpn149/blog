@@ -6,15 +6,23 @@ import MetroMap from '@/components/metro/MetroMap';
 import ContentPanel from '@/components/metro/ContentPanel';
 import '@/components/metro/styles.css';
 
-import { ANDROID_ROUTE } from './data';
+import { ROUTES, ANDROID_ROUTE } from './data';
+import { StationType } from '@/components/metro/StationNode';
 
 function Page() {
     const navigate = useNavigate();
 
-    // State
-    const [stations, setStations] = useState(ANDROID_ROUTE.stations);
-    // Initialize Active Station (Default to first one)
-    const [activeStationId, setActiveStationId] = useState(stations[0].id);
+    // State for Config
+    const [currentRouteId, setCurrentRouteId] = useState(ANDROID_ROUTE.id);
+
+    // State for Stations (derived from route)
+    const [stations, setStations] = useState(ROUTES[currentRouteId].stations);
+
+    // Initialize Active Station
+    const [activeStationId, setActiveStationId] = useState(() => {
+        return ROUTES[currentRouteId].stations[0].id;
+    });
+
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     // Derive active station object and index
@@ -22,7 +30,34 @@ function Page() {
     const activeStation = stations[activeStationIndex] || stations[0];
     const isLastStation = activeStationIndex === stations.length - 1;
 
+    const currentRoute = ROUTES[currentRouteId];
+
     const handleStationClick = (station) => {
+        // 1. Interchange Logic
+        if (station.type === StationType.INTERCHANGE && station.connectedRoutes && station.connectedRoutes.length > 1) {
+
+            // If we are already at this station (Active), then click implies "Switch Route"
+            if (activeStationId === station.id) {
+                // Find current route index
+                const currentRouteIndex = station.connectedRoutes.findIndex(r => r.routeId === currentRouteId);
+
+                if (currentRouteIndex !== -1) {
+                    // Cycle to next route
+                    const nextRouteIndex = (currentRouteIndex + 1) % station.connectedRoutes.length;
+                    const nextRouteConfig = station.connectedRoutes[nextRouteIndex];
+
+                    console.log(`Switching to route: ${nextRouteConfig.routeId}`);
+
+                    // Execute Switch
+                    setCurrentRouteId(nextRouteConfig.routeId);
+                    setStations(ROUTES[nextRouteConfig.routeId].stations);
+                    setActiveStationId(nextRouteConfig.stationId);
+                    return;
+                }
+            }
+        }
+
+        // 2. Normal Navigation
         setActiveStationId(station.id);
         setMobileMenuOpen(false);
     };
@@ -45,7 +80,7 @@ function Page() {
         <div className="metro-app-container">
             {/* Mobile Header */}
             <div className="metro-mobile-header">
-                <h1 className="metro-mobile-title">MetroLearn: Android</h1>
+                <h1 className="metro-mobile-title">MetroLearn: {currentRoute.name}</h1>
                 <button
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     className="metro-menu-btn"
@@ -62,17 +97,17 @@ function Page() {
                     <div className="metro-sidebar-header">
                         <h1
                             className="metro-route-title"
-                            style={{ color: ANDROID_ROUTE.color }}
+                            style={{ color: currentRoute.color }}
                         >
-                            {ANDROID_ROUTE.name}
+                            {currentRoute.name}
                         </h1>
                     </div>
 
                     <MetroMap
                         stations={stations}
-                        currentRouteName={ANDROID_ROUTE.name}
-                        currentRouteColor={ANDROID_ROUTE.color}
-                        currentRouteId={ANDROID_ROUTE.id}
+                        currentRouteName={currentRoute.name}
+                        currentRouteColor={currentRoute.color}
+                        currentRouteId={currentRouteId}
                         activeStationId={activeStationId}
                         onStationClick={handleStationClick}
                     />

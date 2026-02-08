@@ -185,6 +185,7 @@
     cursor: pointer;
     background-color: white;
     padding: 0;
+    border: none;
 }
 
 .metro-node-button:hover {
