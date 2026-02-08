@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react';
 
 import MetroMap from '@/components/metro/MetroMap';
 import ContentPanel from '@/components/metro/ContentPanel';
-import '@/components/metro/styles.scss';
+import styles from '@/components/metro/Metro.module.scss';
 
 import { ROUTES, ANDROID_ROUTE } from './data';
 import { StationType } from '@/components/metro/StationNode';
@@ -77,26 +77,26 @@ function Page() {
     };
 
     return (
-        <div className="metro-app-container">
+        <div className={styles.appContainer}>
             {/* Mobile Header */}
-            <div className="metro-mobile-header">
-                <h1 className="metro-mobile-title">MetroLearn: {currentRoute.name}</h1>
+            <div className={styles.mobileHeader}>
+                <h1 className={styles.mobileTitle}>MetroLearn: {currentRoute.name}</h1>
                 <button
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    className="metro-menu-btn"
+                    className={styles.menuBtn}
                 >
                     {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
             </div>
 
-            <main className="metro-main-layout">
+            <main className={styles.mainLayout}>
                 {/* Left Sidebar: Metro Map */}
                 <aside
-                    className={`metro-sidebar metro-scroll ${mobileMenuOpen ? 'open' : ''}`}
+                    className={`${styles.sidebar} ${styles.scroll} ${mobileMenuOpen ? styles.open : ''}`}
                 >
-                    <div className="metro-sidebar-header">
+                    <div className={styles.sidebarHeader}>
                         <h1
-                            className="metro-route-title"
+                            className={styles.routeTitle}
                             style={{ color: currentRoute.color }}
                         >
                             {currentRoute.name}
@@ -114,11 +114,11 @@ function Page() {
                 </aside>
 
                 {/* Right Content Area */}
-                <section className="metro-content-area">
+                <section className={styles.contentArea}>
                     {/* Background Decorative Pattern */}
-                    <div className="metro-bg-pattern"></div>
+                    <div className={styles.bgPattern}></div>
 
-                    <div className="metro-content-wrapper">
+                    <div className={styles.contentWrapper}>
                         <ContentPanel
                             station={activeStation}
                             isLastStation={isLastStation}

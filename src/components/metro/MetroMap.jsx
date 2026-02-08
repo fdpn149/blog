@@ -1,6 +1,6 @@
 import React from 'react';
 import StationNode from './StationNode';
-import './styles.css';
+import styles from './Metro.module.scss';
 
 const MetroMap = ({
     stations,
@@ -10,31 +10,27 @@ const MetroMap = ({
     activeStationId,
     onStationClick
 }) => {
-
     return (
-        <div className="metro-map-container">
-
-            {/* Stations List Container */}
-            <div className="metro-stations-list">
-
-                {/* Continuous Route Line (Background) */}
-                {/* 
-            Positioned absolutely to run through the center of the station nodes.
-        */}
+        <div className={styles.mapContainer}>
+            <div className={styles.stationsList}>
+                {/* Visual Line Background */}
                 <div
-                    className="metro-route-line-bg"
+                    className={styles.routeLineBg}
                     style={{ backgroundColor: currentRouteColor }}
                 />
 
                 {stations.map((station, index) => {
+                    const isActive = station.id === activeStationId;
+                    const isLast = index === stations.length - 1;
+
                     return (
                         <StationNode
                             key={station.id}
                             station={station}
                             currentColor={currentRouteColor}
-                            currentRouteId={currentRouteId} // Pass ID
-                            isActive={station.id === activeStationId}
-                            isLast={index === stations.length - 1}
+                            currentRouteId={currentRouteId}
+                            isActive={isActive}
+                            isLast={isLast}
                             onClick={onStationClick}
                         />
                     );

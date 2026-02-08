@@ -1,4 +1,4 @@
-/* Metro Style SCSS - Theme Integrated */
+/* Metro Style CSS Module */
 
 // Use global CSS variables defined in src/styles/global.scss
 
@@ -11,7 +11,7 @@
 }
 
 /* App Layout */
-.metro-app-container {
+.appContainer {
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -21,7 +21,7 @@
     color: var(--text-color); // Global Theme Var
 }
 
-.metro-mobile-header {
+.mobileHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -31,14 +31,14 @@
     z-index: 50;
 }
 
-.metro-mobile-title {
+.mobileTitle {
     font-weight: 700;
     font-size: 1.125rem;
     color: var(--text-color);
     margin: 0;
 }
 
-.metro-menu-btn {
+.menuBtn {
     padding: 0.5rem;
     color: var(--muted-text-color); // Global Theme Var
     background: none;
@@ -47,17 +47,17 @@
     cursor: pointer;
 }
 
-.metro-menu-btn:hover {
+.menuBtn:hover {
     background-color: var(--hover-bg-color); // Global Theme Var
 }
 
 @media (min-width: 768px) {
-    .metro-mobile-header {
+    .mobileHeader {
         display: none;
     }
 }
 
-.metro-main-layout {
+.mainLayout {
     display: flex;
     flex: 1;
     overflow: hidden;
@@ -65,7 +65,7 @@
 }
 
 /* Sidebar */
-.metro-sidebar {
+.sidebar {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -79,12 +79,12 @@
     transform: translateX(-100%);
 }
 
-.metro-sidebar.open {
+.sidebar.open {
     transform: translateX(0);
 }
 
 @media (min-width: 768px) {
-    .metro-sidebar {
+    .sidebar {
         position: relative;
         width: 320px;
         flex: none;
@@ -92,18 +92,17 @@
     }
 }
 
-.metro-sidebar-header {
+.sidebarHeader {
     position: sticky;
     top: 0;
     background-color: var(--sidebar-bg-color); // Global Theme Var
-    /* backdrop-filter: blur(4px); Removed blur as it might conflict with solid bg in dark mode */
     z-index: 10;
     padding: 1.5rem;
     border-bottom: 1px solid var(--border-color);
     box-shadow: 0 1px 2px 0 var(--shadow-color);
 }
 
-.metro-route-title {
+.routeTitle {
     font-size: 1.875rem;
     font-weight: 900;
     letter-spacing: -0.05em;
@@ -115,7 +114,7 @@
 }
 
 /* Metro Map */
-.metro-map-container {
+.mapContainer {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -124,18 +123,18 @@
 }
 
 @media (min-width: 768px) {
-    .metro-map-container {
+    .mapContainer {
         padding-left: 0.5rem;
     }
 }
 
-.metro-stations-list {
+.stationsList {
     position: relative;
     display: flex;
     flex-direction: column;
 }
 
-.metro-route-line-bg {
+.routeLineBg {
     position: absolute;
     left: 2rem;
     /* 32px center */
@@ -150,7 +149,7 @@
 }
 
 /* Station Node */
-.metro-station-node {
+.stationNode {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -161,7 +160,7 @@
     opacity: 1;
 }
 
-.metro-node-track-col {
+.nodeTrackCol {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -172,7 +171,7 @@
     position: relative;
 }
 
-.metro-node-button {
+.nodeButton {
     position: relative;
     z-index: 10;
     border-radius: 9999px;
@@ -186,27 +185,27 @@
     border: none;
 }
 
-.metro-node-button:hover {
+.nodeButton:hover {
     transform: scale(1.1);
 }
 
-.metro-node-button.active-scale {
+.nodeButton.activeScale {
     transform: scale(1.1);
 }
 
-.metro-node-large {
+.nodeLarge {
     width: 2.75rem;
     /* 44px */
     height: 2.75rem;
 }
 
-.metro-node-normal {
+.nodeNormal {
     width: 2rem;
     /* 32px */
     height: 2rem;
 }
 
-.metro-node-inner {
+.nodeInner {
     width: 100%;
     height: 100%;
     background-color: var(--secondary-bg-color); // Global Theme Var
@@ -218,7 +217,7 @@
     position: relative;
 }
 
-.metro-active-dot {
+.activeDot {
     width: 50%;
     height: 50%;
     border-radius: 9999px;
@@ -226,7 +225,7 @@
     transition: all 0.3s;
 }
 
-.metro-node-label-col {
+.nodeLabelCol {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -234,12 +233,12 @@
     padding-right: 0.5rem;
 }
 
-.metro-node-label-wrapper {
+.nodeLabelWrapper {
     display: flex;
     align-items: center;
 }
 
-.metro-node-label {
+.nodeLabel {
     font-family: var(--metro-font-sans);
     letter-spacing: -0.025em;
     text-transform: uppercase;
@@ -248,38 +247,38 @@
     margin: 0;
 }
 
-.metro-node-label.active {
+.nodeLabel.active {
     color: var(--text-color);
     font-weight: 700;
 }
 
-.metro-node-label.inactive {
+.nodeLabel.inactive {
     color: var(--muted-text-color);
     font-weight: 500;
 }
 
-.metro-label-large {
+.labelLarge {
     font-size: 1rem;
 }
 
 @media (min-width: 768px) {
-    .metro-label-large {
+    .labelLarge {
         font-size: 1.125rem;
     }
 }
 
-.metro-label-small {
+.labelSmall {
     font-size: 0.875rem;
 }
 
 @media (min-width: 768px) {
-    .metro-label-small {
+    .labelSmall {
         font-size: 0.9375rem;
     }
 }
 
 /* Content Area */
-.metro-content-area {
+.contentArea {
     flex: 1;
     height: 100%;
     min-width: 0;
@@ -289,23 +288,22 @@
 }
 
 @media (min-width: 768px) {
-    .metro-content-area {
+    .contentArea {
         padding: 2rem;
     }
 }
 
-.metro-bg-pattern {
+.bgPattern {
     position: absolute;
     inset: 0;
     z-index: 0;
     opacity: 0.03;
     pointer-events: none;
-    // Keep fixed pattern color for now, or adapt if needed
     background-image: radial-gradient(var(--text-color) 1px, transparent 1px);
     background-size: 24px 24px;
 }
 
-.metro-content-wrapper {
+.contentWrapper {
     position: relative;
     z-index: 10;
     height: 100%;
@@ -315,7 +313,7 @@
 }
 
 /* Content Panel */
-.metro-content-panel {
+.contentPanel {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -326,14 +324,13 @@
     overflow: hidden;
 }
 
-.metro-panel-header {
+.panelHeader {
     padding: 2rem;
     border-bottom: 1px solid var(--border-color);
-    // Use solid generic bg or a gradient using vars
     background: var(--sidebar-bg-color);
 }
 
-.metro-panel-title {
+.panelTitle {
     font-size: 1.875rem;
     font-weight: 800;
     color: var(--text-color);
@@ -342,57 +339,57 @@
 }
 
 @media (min-width: 768px) {
-    .metro-panel-title {
+    .panelTitle {
         font-size: 2.25rem;
     }
 }
 
-.metro-panel-desc {
+.panelDesc {
     font-size: 1.125rem;
     color: var(--muted-text-color);
     line-height: 1.625;
     margin: 0;
 }
 
-.metro-panel-body {
+.panelBody {
     flex: 1;
     padding: 2rem;
     overflow-y: auto;
 }
 
-.metro-panel-prose {
+.panelProse {
     max-width: none;
     color: var(--text-color);
 }
 
-.metro-panel-prose p {
+.panelProse p {
     margin-bottom: 1.25em;
     line-height: 1.75;
 }
 
-.metro-learning-objective {
-    background-color: var(--hover-bg-color); // Use hover bg as a light shade
+.learningObjective {
+    background-color: var(--hover-bg-color);
     border-left: 4px solid var(--metro-color-blue-500);
     padding: 1rem;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
 }
 
-.metro-lo-title {
+.loTitle {
     font-weight: 700;
-    color: var(--text-color); // Or keep blue if preferred
+    color: var(--text-color);
     margin: 0 0 0.25rem 0;
     font-size: 1rem;
 }
 
-.metro-lo-text {
+.loText {
     color: var(--text-color);
     opacity: 0.9;
     font-size: 0.875rem;
     margin: 0;
 }
 
-.metro-panel-footer {
+.panelFooter {
     padding: 1.5rem;
     background-color: var(--hover-bg-color);
     border-top: 1px solid var(--border-color);
@@ -403,11 +400,9 @@
     bottom: 0;
 }
 
-.metro-next-btn {
-    background-color: var(--text-color); // Invert colors: Black in light, White in dark? 
-    // Or just use a fixed dark color that contrasts well. 
-    // Let's stick to text-color for high contrast against the footer bg
-    color: var(--secondary-bg-color); // Inverted text
+.nextBtn {
+    background-color: var(--text-color);
+    color: var(--secondary-bg-color);
 
     border: none;
     font-weight: 700;
@@ -421,28 +416,28 @@
     transition: transform 0.1s, opacity 0.2s;
 }
 
-.metro-next-btn:hover {
+.nextBtn:hover {
     opacity: 0.9;
 }
 
-.metro-next-btn:active {
+.nextBtn:active {
     transform: scale(0.95);
 }
 
-.metro-icon-ml {
+.iconMl {
     margin-left: 0.5rem;
 }
 
 /* Scrollbar */
-.metro-scroll::-webkit-scrollbar {
+.scroll::-webkit-scrollbar {
     width: 6px;
 }
 
-.metro-scroll::-webkit-scrollbar-track {
+.scroll::-webkit-scrollbar-track {
     background: transparent;
 }
 
-.metro-scroll::-webkit-scrollbar-thumb {
+.scroll::-webkit-scrollbar-thumb {
     background-color: var(--border-color);
     border-radius: 20px;
 }

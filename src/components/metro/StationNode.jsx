@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles.scss';
+import styles from './Metro.module.scss';
 
 // StationType enum equivalent
 export const StationType = {
@@ -21,8 +21,8 @@ const StationNode = ({
     const isInterchange = type === StationType.INTERCHANGE;
 
     // CSS Class for dimensions
-    const nodeClass = isInterchange ? 'metro-node-large' : 'metro-node-normal';
-    const labelClass = isInterchange ? 'metro-label-large' : 'metro-label-small';
+    const nodeClass = isInterchange ? styles.nodeLarge : styles.nodeNormal;
+    const labelClass = isInterchange ? styles.labelLarge : styles.labelSmall;
 
     // DYNAMIC GRADIENT LOGIC
     const getStationGradient = () => {
@@ -83,25 +83,25 @@ const StationNode = ({
     }
 
     return (
-        <div className="metro-station-node">
+        <div className={styles.stationNode}>
 
             {/* Left Column: The Track & Node */}
-            <div className="metro-node-track-col">
+            <div className={styles.nodeTrackCol}>
 
                 {/* The Station Node (Circle) */}
                 <button
                     onClick={() => onClick(station)}
-                    className={`metro-node-button ${nodeClass} ${isActive && !isInterchange ? 'active-scale' : ''}`}
+                    className={`${styles.nodeButton} ${nodeClass} ${isActive && !isInterchange ? styles.activeScale : ''}`}
                     style={containerStyle}
                     aria-label={`Select station: ${title}`}
                 >
                     {/* Inner Circle (White Background) acting as Mask */}
-                    <div className="metro-node-inner">
+                    <div className={styles.nodeInner}>
 
                         {/* ACTIVE STATE DOT */}
                         {isActive && (
                             <div
-                                className="metro-active-dot"
+                                className={styles.activeDot}
                                 style={{ backgroundColor: currentColor }}
                             />
                         )}
@@ -111,10 +111,10 @@ const StationNode = ({
             </div>
 
             {/* Right Column: Station Name */}
-            <div className="metro-node-label-col">
-                <div className="metro-node-label-wrapper">
+            <div className={styles.nodeLabelCol}>
+                <div className={styles.nodeLabelWrapper}>
                     <h3
-                        className={`metro-node-label ${labelClass} ${isActive ? 'active' : 'inactive'}`}
+                        className={`${styles.nodeLabel} ${labelClass} ${isActive ? styles.active : styles.inactive}`}
                     >
                         {title}
                     </h3>
