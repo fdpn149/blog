@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import styles from './Metro.module.scss';
 import { StationType } from './StationNode';
-import DynamicRouter from '@/components/router/DynamicRouter';
+import { DynamicRouter } from '@/components';
 
 const ContentPanel = ({
     station,

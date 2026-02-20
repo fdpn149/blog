@@ -1,3 +1,5 @@
+@use '../../styles/dimens' as *;
+
 $header-height: 80px;
 
 .header {
@@ -12,10 +14,11 @@ $header-height: 80px;
         display: none;
         background-color: transparent;
         color: $text-color;
-        @include font(1.6);
+        font-size: var(--font-2xl);
+        line-height: var(--leading-tight);
         position: absolute;
         top: 0;
-        left: 1rem;
+        left: var(--spacing-md);
         line-height: $header-height;
         border: none;
     }
@@ -37,7 +40,7 @@ $header-height: 80px;
 
         >li {
             display: inline;
-            margin: 0 1rem;
+            margin: 0 var(--spacing-md);
 
             >a {
                 color: $text-color;
@@ -50,7 +53,7 @@ $header-height: 80px;
         }
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: #{$breakpoint-md}) {
         .menu {
             display: block;
         }
@@ -92,7 +95,7 @@ $header-height: 80px;
     padding: 0 0.5em 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: #{$breakpoint-md}) {
     .logo {
         padding-left: 0%;
         flex-direction: column;

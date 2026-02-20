@@ -3,55 +3,45 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { MainLayout, MetroMap, ContentPanel } from '@/components';
 import styles from '@/components/layout/MainLayout.module.scss';
 import metroStyles from '@/components/metro/Metro.module.scss';
-import { ROUTES, MATH_ROUTE } from './數學/data';
+
+import { ROUTES, NOTES_ROUTE } from './notes/data';
 import { StationType } from '@/components/metro/StationNode';
 
 function Page() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // Helper: Determine initial route based on URL
     const getInitialRouteId = () => {
         const pathname = decodeURIComponent(location.pathname);
-        // Find any matching route
         for (const [routeId, routeData] of Object.entries(ROUTES)) {
             if (routeData.stations.some(s => s.link === pathname)) {
                 return routeId;
             }
         }
-        return MATH_ROUTE.id;
+        return NOTES_ROUTE.id;
     };
 
-    // State for Config
     const [currentRouteId, setCurrentRouteId] = useState(getInitialRouteId);
-
-    // State for Stations (derived from route)
     const [stations, setStations] = useState(ROUTES[currentRouteId].stations);
-
-    // Initialize Active Station
     const [activeStationId, setActiveStationId] = useState(() => {
         const pathname = decodeURIComponent(location.pathname);
-        // Try to find station in the determined currentRouteId
         const found = ROUTES[currentRouteId].stations.find(s => s.link === pathname);
-        return found ? found.id : ROUTES[currentRouteId].stations[0].id; // Default to Hub
+        return found ? found.id : ROUTES[currentRouteId].stations[0].id;
     });
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-    // Derive active station object and index
     const activeStationIndex = stations.findIndex(s => s.id === activeStationId);
     const activeStation = stations[activeStationIndex] || stations[0];
     const isLastStation = activeStationIndex === stations.length - 1;
 
     const currentRoute = ROUTES[currentRouteId];
 
-    // Sync State with URL
     React.useEffect(() => {
         const pathname = decodeURIComponent(location.pathname);
         let foundStation = null;
         let foundRouteId = null;
 
-        // Search for station matching the current path
         const candidates = [];
         for (const [routeId, routeData] of Object.entries(ROUTES)) {
             const station = routeData.stations.find(s => s.link === pathname);
@@ -62,6 +52,7 @@ function Page() {
 
         if (candidates.length > 0) {
             const currentRouteMatch = candidates.find(c => c.routeId === currentRouteId);
+
             if (currentRouteMatch) {
                 foundStation = currentRouteMatch.station;
                 foundRouteId = currentRouteMatch.routeId;
@@ -71,7 +62,6 @@ function Page() {
             }
         }
 
-        // If found, update state
         if (foundStation && foundRouteId) {
             if (currentRouteId !== foundRouteId) {
                 setCurrentRouteId(foundRouteId);
@@ -84,16 +74,26 @@ function Page() {
     }, [location.pathname, currentRouteId]);
 
     const handleStationClick = (station) => {
-        // Interchange Logic (Simplified for Math as there are no interchanges yet)
+        if (station.type === StationType.INTERCHANGE && station.connectedRoutes && station.connectedRoutes.length > 1) {
+            if (activeStationId === station.id) {
+                const currentRouteIndex = station.connectedRoutes.findIndex(r => r.routeId === currentRouteId);
+                if (currentRouteIndex !== -1) {
+                    const nextRouteIndex = (currentRouteIndex + 1) % station.connectedRoutes.length;
+                    const nextRouteConfig = station.connectedRoutes[nextRouteIndex];
+                    setCurrentRouteId(nextRouteConfig.routeId);
+                    setStations(ROUTES[nextRouteConfig.routeId].stations);
+                    setActiveStationId(nextRouteConfig.stationId);
+                    return;
+                }
+            }
+        }
 
-        // Normal Navigation & URL Update
         setActiveStationId(station.id);
 
         if (station.link) {
             navigate(station.link);
         } else {
-            // If no link (e.g. Hub), navigate to base
-            navigate('/tools/數學');
+            navigate('/notes');
         }
 
         setMobileMenuOpen(false);

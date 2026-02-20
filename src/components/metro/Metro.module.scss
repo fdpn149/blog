@@ -1,6 +1,7 @@
 /* Metro Style CSS Module */
 
 // Use global CSS variables defined in src/styles/global.scss
+@use '../../styles/dimens' as *;
 
 :root {
     // Keep internal legacy vars if needed, but map them to global theme vars where possible
@@ -10,103 +11,27 @@
     --metro-font-sans: 'Inter', sans-serif;
 }
 
-/* App Layout */
-.appContainer {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
-    background-color: var(--background-color); // Global Theme Var
-    font-family: var(--metro-font-sans);
-    color: var(--text-color); // Global Theme Var
-}
-
-.mobileHeader {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem;
-    background-color: var(--sidebar-bg-color); // Global Theme Var
-    border-bottom: 1px solid var(--border-color); // Global Theme Var
-    z-index: 50;
-}
-
-.mobileTitle {
-    font-weight: 700;
-    font-size: 1.125rem;
-    color: var(--text-color);
-    margin: 0;
-}
-
-.menuBtn {
-    padding: 0.5rem;
-    color: var(--muted-text-color); // Global Theme Var
-    background: none;
-    border: none;
-    border-radius: 0.375rem;
-    cursor: pointer;
-}
-
-.menuBtn:hover {
-    background-color: var(--hover-bg-color); // Global Theme Var
-}
-
-@media (min-width: 768px) {
-    .mobileHeader {
-        display: none;
-    }
-}
-
-.mainLayout {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-    position: relative;
-}
-
-/* Sidebar */
-.sidebar {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: var(--sidebar-bg-color); // Global Theme Var
-    border-right: 1px solid var(--border-color); // Global Theme Var
-    overflow-y: auto;
-    z-index: 40;
-    transition: transform 0.3s ease-in-out;
-    transform: translateX(-100%);
-}
-
-.sidebar.open {
-    transform: translateX(0);
-}
-
-@media (min-width: 768px) {
-    .sidebar {
-        position: relative;
-        width: 320px;
-        flex: none;
-        transform: translateX(0);
-    }
-}
+/* App Layout - Deprecated/Removed as now handled by MainLayout */
+/* 
+.appContainer, .mobileHeader, .mainLayout, .sidebar
+were removed to avoid conflicts with MainLayout.module.scss
+*/
 
 .sidebarHeader {
     position: sticky;
     top: 0;
     background-color: var(--sidebar-bg-color); // Global Theme Var
     z-index: 10;
-    padding: 1.5rem;
+    padding: var(--spacing-lg);
     border-bottom: 1px solid var(--border-color);
     box-shadow: 0 1px 2px 0 var(--shadow-color);
 }
 
 .routeTitle {
-    font-size: 1.875rem;
-    font-weight: 900;
+    font-size: var(--font-3xl);
+    font-weight: var(--font-black);
     letter-spacing: -0.05em;
-    line-height: 1;
+    line-height: var(--leading-none);
     text-transform: uppercase;
     word-break: break-word;
     margin: 0;
@@ -122,9 +47,9 @@
     user-select: none;
 }
 
-@media (min-width: 768px) {
+@media (min-width: #{$breakpoint-md}) {
     .mapContainer {
-        padding-left: 0.5rem;
+        padding-left: var(--spacing-sm);
     }
 }
 
@@ -229,8 +154,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-left: 0.25rem;
-    padding-right: 0.5rem;
+    padding-left: var(--spacing-xs);
+    padding-right: var(--spacing-sm);
 }
 
 .nodeLabelWrapper {
@@ -242,75 +167,42 @@
     font-family: var(--metro-font-sans);
     letter-spacing: -0.025em;
     text-transform: uppercase;
-    line-height: 1.1;
+    line-height: var(--leading-none);
     transition: color 0.3s;
     margin: 0;
 }
 
 .nodeLabel.active {
     color: var(--text-color);
-    font-weight: 700;
+    font-weight: var(--font-bold);
 }
 
 .nodeLabel.inactive {
     color: var(--muted-text-color);
-    font-weight: 500;
+    font-weight: var(--font-medium);
 }
 
 .labelLarge {
-    font-size: 1rem;
+    font-size: var(--font-base);
 }
 
-@media (min-width: 768px) {
+@media (min-width: #{$breakpoint-md}) {
     .labelLarge {
-        font-size: 1.125rem;
+        font-size: var(--font-lg);
     }
 }
 
 .labelSmall {
-    font-size: 0.875rem;
+    font-size: var(--font-sm);
 }
 
-@media (min-width: 768px) {
+@media (min-width: #{$breakpoint-md}) {
     .labelSmall {
-        font-size: 0.9375rem;
+        font-size: var(--font-base);
     }
 }
 
-/* Content Area */
-.contentArea {
-    flex: 1;
-    height: 100%;
-    min-width: 0;
-    padding: 1rem;
-    overflow: hidden;
-    position: relative;
-}
-
-@media (min-width: 768px) {
-    .contentArea {
-        padding: 2rem;
-    }
-}
-
-.bgPattern {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    opacity: 0.03;
-    pointer-events: none;
-    background-image: radial-gradient(var(--text-color) 1px, transparent 1px);
-    background-size: 24px 24px;
-}
-
-.contentWrapper {
-    position: relative;
-    z-index: 10;
-    height: 100%;
-    max-width: 56rem;
-    /* 4xl */
-    margin: 0 auto;
-}
+/* Content Area - Deprecated/Removed as handled by MainLayout */
 
 /* Content Panel */
 .contentPanel {
@@ -318,7 +210,7 @@
     flex-direction: column;
     height: 100%;
     background-color: var(--secondary-bg-color); // Global Theme Var
-    border-radius: 0.75rem;
+    border-radius: var(--radius-lg);
     box-shadow: 0 1px 2px 0 var(--shadow-color);
     border: 1px solid var(--border-color);
     overflow: hidden;
@@ -327,29 +219,29 @@
 
 
 .panelTitle {
-    font-size: 1.875rem;
-    font-weight: 800;
+    font-size: var(--font-3xl);
+    font-weight: var(--font-extrabold);
     color: var(--text-color);
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-md);
     margin-top: 0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: #{$breakpoint-md}) {
     .panelTitle {
-        font-size: 2.25rem;
+        font-size: var(--font-4xl);
     }
 }
 
 .panelDesc {
-    font-size: 1.125rem;
+    font-size: var(--font-lg);
     color: var(--muted-text-color);
-    line-height: 1.625;
+    line-height: var(--leading-relaxed);
     margin: 0;
 }
 
 .panelBody {
     flex: 1;
-    padding: 2rem;
+    padding: var(--spacing-xl);
     overflow-y: auto;
 }
 
@@ -360,33 +252,33 @@
 
 .panelProse p {
     margin-bottom: 1.25em;
-    line-height: 1.75;
+    line-height: var(--leading-loose);
 }
 
 .learningObjective {
     background-color: var(--hover-bg-color);
     border-left: 4px solid var(--metro-color-blue-500);
-    padding: 1rem;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    padding: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
 }
 
 .loTitle {
-    font-weight: 700;
+    font-weight: var(--font-bold);
     color: var(--text-color);
-    margin: 0 0 0.25rem 0;
-    font-size: 1rem;
+    margin: 0 0 var(--spacing-xs) 0;
+    font-size: var(--font-base);
 }
 
 .loText {
     color: var(--text-color);
     opacity: 0.9;
-    font-size: 0.875rem;
+    font-size: var(--font-sm);
     margin: 0;
 }
 
 .panelFooter {
-    padding: 1.5rem;
+    padding: var(--spacing-lg);
     background-color: var(--hover-bg-color);
     border-top: 1px solid var(--border-color);
     display: flex;
@@ -401,14 +293,14 @@
     color: var(--secondary-bg-color);
 
     border: none;
-    font-weight: 700;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
+    font-weight: var(--font-bold);
+    padding: 0.75rem var(--spacing-lg);
+    border-radius: var(--radius-md);
     box-shadow: 0 10px 15px -3px var(--strong-shadow-color);
     display: flex;
     align-items: center;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: var(--font-base);
     transition: transform 0.1s, opacity 0.2s;
 }
 
@@ -421,7 +313,7 @@
 }
 
 .iconMl {
-    margin-left: 0.5rem;
+    margin-left: var(--spacing-sm);
 }
 
 /* Scrollbar */

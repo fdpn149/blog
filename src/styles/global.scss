@@ -8,6 +8,46 @@
   --sidebar-bg-color: #{$light-sidebar-bg-color};
   --hover-bg-color: #{$light-hover-bg-color};
   --secondary-bg-color: #{$light-secondary-bg-color};
+
+  // Dimensions & Spacing
+  --spacing-xs: #{$spacing-xs};
+  --spacing-sm: #{$spacing-sm};
+  --spacing-md: #{$spacing-md};
+  --spacing-lg: #{$spacing-lg};
+  --spacing-xl: #{$spacing-xl};
+  --spacing-2xl: #{$spacing-2xl};
+
+  // Radius
+  --radius-sm: #{$radius-sm};
+  --radius-md: #{$radius-md};
+  --radius-lg: #{$radius-lg};
+  --radius-full: #{$radius-full};
+
+  // Typography (Sizes)
+  --font-xs: #{$font-xs};
+  --font-sm: #{$font-sm};
+  --font-base: #{$font-base};
+  --font-lg: #{$font-lg};
+  --font-xl: #{$font-xl};
+  --font-2xl: #{$font-2xl};
+  --font-3xl: #{$font-3xl};
+  --font-4xl: #{$font-4xl};
+
+  // Typography (Line Heights)
+  --leading-none: #{$leading-none};
+  --leading-tight: #{$leading-tight};
+  --leading-snug: #{$leading-snug};
+  --leading-normal: #{$leading-normal};
+  --leading-relaxed: #{$leading-relaxed};
+  --leading-loose: #{$leading-loose};
+
+  // Typography (Weights)
+  --font-normal: #{$font-normal};
+  --font-medium: #{$font-medium};
+  --font-semibold: #{$font-semibold};
+  --font-bold: #{$font-bold};
+  --font-extrabold: #{$font-extrabold};
+  --font-black: #{$font-black};
 }
 
 // 深色模式
@@ -51,9 +91,11 @@
 
 body {
   font-family: "Noto Sans TC", sans-serif;
-  background-color: $background-color;
-  color: $text-color;
+  background-color: var(--background-color);
+  color: var(--text-color);
   word-break: break-all;
+  font-size: var(--font-base);
+  line-height: var(--leading-normal);
 }
 
 img {
@@ -62,9 +104,11 @@ img {
 }
 
 h2 {
-  @include font(2);
+  font-size: var(--font-2xl);
+  line-height: var(--leading-tight);
 }
 
 h3 {
-  @include font(1.6);
+  font-size: var(--font-xl);
+  line-height: var(--leading-tight);
 }

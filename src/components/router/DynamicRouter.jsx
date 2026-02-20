@@ -38,11 +38,7 @@ export default function DynamicRouter({ props }) {
 
             let loadFn = pages[targetPath];
 
-            if (!loadFn) {
-                // Try index.jsx
-                const targetPathIndex = `/src/pages${path}/index.jsx`;
-                loadFn = pages[targetPathIndex];
-            }
+
 
             if (!loadFn) {
                 throw new Error("404 Not Found: " + path);

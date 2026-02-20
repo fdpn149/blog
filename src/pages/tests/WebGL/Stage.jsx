@@ -4,7 +4,7 @@ import { useCamera } from './Camera';
 import { Application } from '@pixi/react';
 import { useMemo } from 'react';
 
-function Cube({ pos }) {
+function Cube({ pos, canvasSize }) {
     const [position, setPosition] = useState(pos);
     const [color, setColor] = useState(Math.random() * 0xffffff | 0);
 
@@ -30,8 +30,8 @@ function Cube({ pos }) {
             graphics.clear()
             graphics.setStrokeStyle({ width: 2, color: color });
             edges.forEach(([i, j]) => {
-                const p1 = objLoc(add(vertices[i], position), camera);
-                const p2 = objLoc(add(vertices[j], position), camera);
+                const p1 = objLoc(add(vertices[i], position), camera, canvasSize);
+                const p2 = objLoc(add(vertices[j], position), camera, canvasSize);
                 if (p1 && p2) {
                     graphics.moveTo(p1[0], p1[1]);
                     graphics.lineTo(p2[0], p2[1]);
@@ -42,40 +42,53 @@ function Cube({ pos }) {
     />
 }
 
-const canvaSize = { width: 1280, height: 720 };
-
 // 轉換函數
-function _2D(x, y) {
-    return [canvaSize.width / 2.0 + x, canvaSize.height / 2.0 - y];
+function _2D(x, y, canvasSize) {
+    return [canvasSize.width / 2.0 + x, canvasSize.height / 2.0 - y];
 }
 
-function _3D(x, y, z, focalLength = 500) {
+function _3D(x, y, z, canvasSize, focalLength = 500) {
     if (z >= 0.1) {
-        return _2D(focalLength * x / z, focalLength * y / z);
+        return _2D(focalLength * x / z, focalLength * y / z, canvasSize);
     }
     return null;
 }
 
-function objLoc(position, camera) {
+function objLoc(position, camera, canvasSize) {
     const translated = [position[0] - camera.position[0], position[1] - camera.position[1], position[2] - camera.position[2]];
     const right = [Math.cos(camera.yaw), 0, Math.sin(camera.yaw)];
     const front = [-Math.sin(camera.yaw) * Math.cos(camera.pitch), Math.sin(camera.pitch), Math.cos(camera.yaw) * Math.cos(camera.pitch)];
     const up = cross(right, front);
     const mat = transpose([right, up, front]);
     const matInv = inv(mat);
-    return _3D(...multiply(matInv, translated), 500);
+    return _3D(...multiply(matInv, translated), canvasSize, 500);
 }
 
 export default function Stage() {
     const parentRef = useRef(null);
     const keys = useRef({ w: false, a: false, s: false, d: false });
     const camera = useCamera();
+    const [canvasSize, setCanvasSize] = useState({ width: 1280, height: 720 });
     // 使用 useMemo 生成固定位置陣列，只生成一次
     const cubePositions = useMemo(() => Array.from({ length: 20 }, () => [
         (Math.random() - 0.5) * 10,
         (Math.random() - 0.5) * 10,
         (Math.random() - 0.5) * 10
     ]), []);
+
+    useEffect(() => {
+        if (!parentRef.current) return;
+        const observer = new ResizeObserver((entries) => {
+            for (let entry of entries) {
+                setCanvasSize({
+                    width: entry.contentRect.width,
+                    height: entry.contentRect.height,
+                });
+            }
+        });
+        observer.observe(parentRef.current);
+        return () => observer.disconnect();
+    }, []);
 
     useEffect(() => {
         const handleMouseMove = (e) => {
@@ -144,15 +157,13 @@ export default function Stage() {
         return () => cancelAnimationFrame(animationFrameId);
     }, [camera.yaw, camera.pitch]);
 
-    return <div ref={parentRef} style={{ width: `${canvaSize.width}px`, height: `${canvaSize.height}px` }}>
+    return <div ref={parentRef} style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: 'var(--radius-lg, 8px)' }}>
         <Application
             resizeTo={parentRef}
-            width={canvaSize.width}
-            height={canvaSize.height}
             backgroundColor={0x01262a}>
             <pixiContainer>
                 {cubePositions.map((pos, index) => (
-                    <Cube key={index} pos={pos} />
+                    <Cube key={index} pos={pos} canvasSize={canvasSize} />
                 ))}
             </pixiContainer>
         </Application>

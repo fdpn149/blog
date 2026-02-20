@@ -1,0 +1,172 @@
+@use '@/styles/dimens' as *;
+
+.mathSection {
+    background-color: var(--sidebar-bg-color, rgba(255, 255, 255, 0.03));
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+    border-radius: var(--radius-xl, 16px);
+    padding: var(--spacing-xl, 2rem);
+    margin: var(--spacing-lg, 1.5rem) 0;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+
+    h2 {
+        font-size: var(--font-3xl, 2rem);
+        font-weight: var(--font-extrabold, 800);
+        margin-top: 0;
+        margin-bottom: var(--spacing-md, 1rem);
+        color: var(--text-color, #fff);
+        border-bottom: none;
+        padding-bottom: 0;
+
+        @media (min-width: $breakpoint-md) {
+            font-size: var(--font-4xl, 2.25rem);
+        }
+    }
+
+    h3 {
+        font-size: var(--font-xl, 1.25rem);
+        font-weight: var(--font-bold, 700);
+        color: var(--text-color, #fff);
+        margin: var(--spacing-xl, 2rem) 0 var(--spacing-md, 1rem) 0;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    p {
+        color: var(--muted-text-color, #a1a1aa);
+        line-height: var(--leading-relaxed, 1.75);
+        font-size: var(--font-base, 1rem);
+    }
+}
+
+.inputGroup {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm, 0.5rem);
+    flex-wrap: wrap;
+    margin-bottom: var(--spacing-md, 1rem);
+
+    span {
+        color: var(--text-color, #fff);
+        font-weight: var(--font-medium, 500);
+        font-size: var(--font-lg, 1.125rem);
+    }
+}
+
+.input,
+.textarea {
+    background-color: var(--background-color, rgba(0, 0, 0, 0.2));
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.2));
+    border-radius: var(--radius-md, 8px);
+    color: var(--text-color, #fff);
+    padding: 0.75rem 1rem;
+    font-size: var(--font-base, 1rem);
+    font-family: var(--code-font, monospace);
+    transition: all 0.2s ease;
+    width: 100%;
+    outline: none;
+
+    &:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        background-color: var(--background-color, rgba(0, 0, 0, 0.4));
+    }
+}
+
+.input {
+    width: auto;
+    min-width: 120px;
+    flex: 1;
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.5;
+}
+
+.button {
+    background-color: #3b82f6; // Blue 500
+    color: white;
+    font-weight: var(--font-semibold, 600);
+    font-size: var(--font-base, 1rem);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md, 8px);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.4);
+
+    &:hover {
+        background-color: #2563eb; // Blue 600
+        box-shadow: 0 6px 8px -1px rgba(59, 130, 246, 0.5);
+        transform: translateY(-1px);
+    }
+
+    &:active {
+        transform: translateY(1px);
+        box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.4);
+    }
+}
+
+.resultBox {
+    background-color: rgba(16, 185, 129, 0.1); // Emerald tinted
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: var(--radius-md, 8px);
+    padding: var(--spacing-lg, 1.5rem);
+    margin-top: var(--spacing-md, 1rem);
+
+    p {
+        color: var(--text-color, #fff);
+        font-family: var(--code-font, monospace);
+        font-size: var(--font-lg, 1.125rem);
+        word-break: break-all;
+        margin: 0;
+    }
+}
+
+.sliderContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md, 1rem);
+    margin: var(--spacing-lg, 1.5rem) 0;
+
+    label {
+        color: var(--text-color, #fff);
+        font-weight: var(--font-medium, 500);
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm, 0.5rem);
+    }
+
+    input[type=range] {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        background: transparent;
+
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #3b82f6;
+            cursor: pointer;
+            margin-top: -6px;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        &::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+        }
+    }
+}

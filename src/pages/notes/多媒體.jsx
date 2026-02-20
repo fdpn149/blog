@@ -1,20 +1,16 @@
-import Footer from "@/components/footer/Footer"
-import Header from "@/components/header/Header"
-import styles from "@/pages/Blog.module.scss"
 import Image from "@/components/common/Image"
+import styles from "@/pages/Blog.module.scss"
 
 export default function Page() {
-    return <>
-        <Header />
-        <main className={styles.main}>
-            <h2>多媒體筆記</h2>
+    return (
+        <div className={styles.main}>
             <section>
-                <details>
+                <details open>
                     <summary><h3>類比影像→數位影像</h3></summary>
                     <ul>
                         <li>透過 Sampling(取樣) + Quantization(量化)</li>
                     </ul>
-                    <details>
+                    <details open>
                         <summary><h3>Sampling</h3></summary>
                         <ul>
                             <li>將類比的資料以一定的(時間、像素)間隔進行取值，將資料離散化</li>
@@ -22,7 +18,7 @@ export default function Page() {
                         </ul>
                         <Image path='/notes/多媒體/1.png' style={{ 'maxWidth': 'min(100%, 20rem)' }} />
                     </details>
-                    <details>
+                    <details open>
                         <summary><h3>Quantization</h3></summary>
                         <ul>
                             <li>將資料的數值映射到有限的範圍內</li>
@@ -37,7 +33,7 @@ export default function Page() {
                         <Image path='/notes/多媒體/3.png' style={{ 'maxWidth': 'min(100%, 20rem)' }} />
                     </details>
                 </details>
-                <details>
+                <details open>
                     <summary><h3>眼睛的成像</h3></summary>
                     <ul>
                         <li>水晶體可以當作是鏡頭 成像在視網膜</li>
@@ -56,16 +52,16 @@ export default function Page() {
                         <li>眼睛會將看到的顏色 做類似積分的運算 而得到實際感受到的顏色</li>
                     </ul>
                 </details>
-                <details>
+                <details open>
                     <summary><h3>色彩空間</h3></summary>
                     <ul>
                         <li>彩色影像由3個不唯一的bands組成</li>
                     </ul>
                     <Image path='/notes/多媒體/6.png' style={{ 'maxHeight': '12rem' }} />
                     <Image path='/notes/多媒體/7.png' style={{ 'maxHeight': '12rem' }} />
-                    <details>
+                    <details open>
                         <summary><h3>RGB & CMYK</h3></summary>
-                        <details>
+                        <details open>
                             <summary><h3>RGB</h3></summary>
                             <Image path='/notes/多媒體/8.png' style={{ 'maxWidth': 'min(100%, 15rem)' }} />
                             <Image path='/notes/多媒體/9.png' style={{ 'maxWidth': 'min(100%, 15rem)' }} />
@@ -92,7 +88,6 @@ export default function Page() {
                     </details>
                 </details>
             </section>
-        </main>
-        <Footer />
-    </>
+        </div>
+    );
 }

@@ -1,7 +1,5 @@
 import styles from "@/pages/Blog.module.scss"
-import Footer from "@/components/footer/Footer";
-import Header from "@/components/header/Header";
-import DynamicRouter from "@/components/router/DynamicRouter"
+import { Footer, Header, DynamicRouter } from "@/components";
 
 export function Frame1() {
     return <details>
@@ -33,7 +31,7 @@ export function Frame2() {
         </div>
         <p>我們可以輕易地用這些積木就能組合出0~999的整數，並且立方體的總數就等同實際的數值</p>
         <div>
-            <Component props={{ path: '/tutorials/進位制轉換', component: 'Frame1' }} />
+            <DynamicRouter props={{ path: '/tutorials/AndroidApp開發/進位制轉換', component: 'Frame1' }} />
         </div>
     </details>
 }
@@ -44,7 +42,7 @@ function Blog1() {
         <main className={styles.main}>
             <h2>進位制轉換</h2>
             <section>
-                <Component props={{ path: '/tutorials/進位制轉換', component: 'Frame2' }} />
+                <DynamicRouter props={{ path: '/tutorials/AndroidApp開發/進位制轉換', component: 'Frame2' }} />
             </section>
         </main>
         <Footer />

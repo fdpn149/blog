@@ -1,39 +1,70 @@
+/* Card.module.scss */
+
 .card {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    margin: 2em 2em 2em 0;
-    width: min(43%, 16em);
+    background-color: var(--secondary-bg-color);
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: 4px 4px 4px $strong-shadow-color;
-    border-radius: 2em;
-    transition-duration: 0.3s;
+    box-shadow: 0 1px 3px 0 var(--shadow-color);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+    position: relative;
 
     &:hover {
-        scale: 1.1;
-        cursor: pointer;
+        transform: translateY(-4px);
+        box-shadow: 0 10px 15px -3px var(--strong-shadow-color);
+        border-color: var(--text-color);
     }
+}
+
+.imageWrapper {
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background-color: var(--hover-bg-color);
+    position: relative;
+    border-bottom: 1px solid var(--border-color);
 
     img {
         width: 100%;
-        max-width: 100%;
-        aspect-ratio: 1.78;
+        height: 100%;
         object-fit: cover;
+        transition: transform 0.5s ease;
     }
+}
 
-    p {
-        color: $text-color;
-        font-size: 1.5em;
-    }
+.card:hover .imageWrapper img {
+    transform: scale(1.05);
+}
 
-    @media (max-width: 768px) {
-        margin-right: 0;
-        width: min(60%, 14em);
-        aspect-ratio: 1;
-    }
+.content {
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
 
-    @media (prefers-color-scheme: dark) {
-        // box-shadow handled by $strong-shadow-color variable
-    }
+.title {
+    font-size: var(--font-xl);
+    font-weight: var(--font-bold);
+    margin: 0 0 var(--spacing-sm) 0;
+    color: var(--text-color);
+    line-height: var(--leading-tight);
+}
+
+.description {
+    font-size: var(--font-sm);
+    color: var(--muted-text-color);
+    margin: 0;
+    line-height: var(--leading-relaxed);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }

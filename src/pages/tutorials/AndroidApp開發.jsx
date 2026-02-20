@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { MainLayout, MetroMap, ContentPanel } from '@/components';
+// import styles from '@/components/layout/MainLayout.module.scss'; // Unused? No, used for sidebarHeader/brand
+import styles from '@/components/layout/MainLayout.module.scss';
+import metroStyles from '@/components/metro/Metro.module.scss';
 
-import MetroMap from '@/components/metro/MetroMap';
-import ContentPanel from '@/components/metro/ContentPanel';
-import styles from '@/components/metro/Metro.module.scss';
-
-import { ROUTES, ANDROID_ROUTE } from './data';
+import { ROUTES, ANDROID_ROUTE } from './AndroidApp開發/data';
 import { StationType } from '@/components/metro/StationNode';
 
 function Page() {
@@ -16,7 +15,7 @@ function Page() {
     // Helper: Determine initial route based on URL
     const getInitialRouteId = () => {
         const pathname = decodeURIComponent(location.pathname);
-        if (pathname === '/tutorials/Android/App開發/輸入法') {
+        if (pathname === '/tutorials/AndroidApp開發/輸入法') {
             return 'route-input'; // Default to Purple for this shared URL
         }
 
@@ -81,7 +80,7 @@ function Page() {
                 // If the URL does NOT match current route, we must switch.
 
                 // Special Case for Input Method shared URL if we were NOT on a valid path
-                if (pathname === '/tutorials/Android/App開發/輸入法') {
+                if (pathname === '/tutorials/AndroidApp開發/輸入法') {
                     foundRouteId = 'route-input';
                     foundStation = ROUTES['route-input'].stations.find(s => s.link === pathname);
                 } else {
@@ -152,7 +151,7 @@ function Page() {
             // If no link (e.g. some hubs if they didn't have one), reset to base? 
             // Actually, for consistency, maybe we shouldn't reset if we want to stay "in context".
             // But previous requirement was to reset. Let's keep it safe.
-            navigate('/tutorials/Android/App開發');
+            navigate('/tutorials/AndroidApp開發');
         }
 
         setMobileMenuOpen(false);
@@ -172,59 +171,46 @@ function Page() {
         }
     };
 
-    return (
-        <div className={styles.appContainer}>
-            {/* Mobile Header */}
-            <div className={styles.mobileHeader}>
-                <h1 className={styles.mobileTitle}>MetroLearn: {currentRoute.name}</h1>
-                <button
-                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    className={styles.menuBtn}
-                >
-                    {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
+    const sidebarContent = (
+        <>
+            <div className={styles.sidebarHeader}>
+                {/* Global Brand Header */}
+                <div>
+                    <h1 className={styles.brandTitle}>波峰小棧</h1>
+                    <p className={styles.brandSubtitle}>Metro Learning Station</p>
+                </div>
             </div>
 
-            <main className={styles.mainLayout}>
-                {/* Left Sidebar: Metro Map */}
-                <aside
-                    className={`${styles.sidebar} ${styles.scroll} ${mobileMenuOpen ? styles.open : ''}`}
+            <div style={{ padding: '1.5rem 1.5rem 0 1.5rem' }}>
+                {/* Course Title */}
+                <h1
+                    className={metroStyles.routeTitle}
+                    style={{ color: currentRoute.color }}
                 >
-                    <div className={styles.sidebarHeader}>
-                        <h1
-                            className={styles.routeTitle}
-                            style={{ color: currentRoute.color }}
-                        >
-                            {currentRoute.name}
-                        </h1>
-                    </div>
+                    {currentRoute.name}
+                </h1>
+            </div>
 
-                    <MetroMap
-                        stations={stations}
-                        currentRouteName={currentRoute.name}
-                        currentRouteColor={currentRoute.color}
-                        currentRouteId={currentRouteId}
-                        activeStationId={activeStationId}
-                        onStationClick={handleStationClick}
-                    />
-                </aside>
+            <MetroMap
+                stations={stations}
+                currentRouteName={currentRoute.name}
+                currentRouteColor={currentRoute.color}
+                currentRouteId={currentRouteId}
+                activeStationId={activeStationId}
+                onStationClick={handleStationClick}
+            />
+        </>
+    );
 
-                {/* Right Content Area */}
-                <section className={styles.contentArea}>
-                    {/* Background Decorative Pattern */}
-                    <div className={styles.bgPattern}></div>
-
-                    <div className={styles.contentWrapper}>
-                        <ContentPanel
-                            station={activeStation}
-                            isLastStation={isLastStation}
-                            onNext={handleNextStation}
-                            onNavigate={handleNavigate}
-                        />
-                    </div>
-                </section>
-            </main>
-        </div>
+    return (
+        <MainLayout sidebar={sidebarContent}>
+            <ContentPanel
+                station={activeStation}
+                isLastStation={isLastStation}
+                onNext={handleNextStation}
+                onNavigate={handleNavigate}
+            />
+        </MainLayout>
     );
 }
 

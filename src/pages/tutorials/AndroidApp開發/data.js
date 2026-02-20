@@ -29,7 +29,7 @@ export const ANDROID_ROUTE = {
             description: '設定與管理 App 的主題色彩系統。',
             type: StationType.NORMAL,
             moduleId: 'module-android',
-            link: '/tutorials/Android/App開發/主題顏色'
+            link: '/tutorials/AndroidApp開發/主題顏色'
         },
         {
             id: 'android_custom',
@@ -37,7 +37,7 @@ export const ANDROID_ROUTE = {
             description: '學習如何打造獨特的 UI 元件。',
             type: StationType.NORMAL,
             moduleId: 'module-android',
-            link: '/tutorials/Android/App開發/客製化元件'
+            link: '/tutorials/AndroidApp開發/客製化元件'
         },
         {
             id: 'android_binding',
@@ -45,7 +45,7 @@ export const ANDROID_ROUTE = {
             description: '理解資料流向與狀態管理。',
             type: StationType.NORMAL,
             moduleId: 'module-android',
-            link: '/tutorials/Android/App開發/資料單向綁定'
+            link: '/tutorials/AndroidApp開發/資料單向綁定'
         },
         {
             id: 'android_input',
@@ -53,7 +53,7 @@ export const ANDROID_ROUTE = {
             description: '實作一個屬於自己的 Android 輸入法。',
             type: StationType.INTERCHANGE,
             moduleId: 'module-android',
-            link: '/tutorials/Android/App開發/輸入法',
+            link: '/tutorials/AndroidApp開發/輸入法',
             connectedRoutes: CONNECTIONS
         }
     ]
@@ -71,7 +71,7 @@ export const INPUT_ROUTE = {
             description: '輸入法框架簡介與實作準備。',
             type: StationType.INTERCHANGE,
             moduleId: 'module-input',
-            link: '/tutorials/Android/App開發/輸入法',
+            link: '/tutorials/AndroidApp開發/輸入法',
             connectedRoutes: CONNECTIONS
         },
         {
@@ -80,7 +80,7 @@ export const INPUT_ROUTE = {
             description: '設定環境與理解基本概念。',
             type: StationType.TERMINUS,
             moduleId: 'module-input',
-            link: '/tutorials/Android/App開發/輸入法/前置作業'
+            link: '/tutorials/AndroidApp開發/輸入法/前置作業'
         }
     ]
 };
@@ -97,7 +97,7 @@ export const KOTLIN_ROUTE = {
             description: '連結 Android 開發與輸入法專題。',
             type: StationType.INTERCHANGE,
             moduleId: 'module-kotlin',
-            link: '/tutorials/Android/App開發/輸入法',
+            link: '/tutorials/AndroidApp開發/輸入法',
             connectedRoutes: CONNECTIONS
         },
         {

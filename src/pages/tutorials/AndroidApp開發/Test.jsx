@@ -1,4 +1,4 @@
-import DynamicRouter from "@/components/router/DynamicRouter";
+import { DynamicRouter } from "@/components";
 
 function Page() {
     return <DynamicRouter props={{ path: '/tutorials/進位制轉換' }} />

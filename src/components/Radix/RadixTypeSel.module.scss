@@ -5,6 +5,6 @@
 .radixInputGroup {
     input {
         width: 6em;
-        font-size: 1em;
+        font-size: var(--font-base);
     }
 }

@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Plot from 'react-plotly.js';
 import { range, complex, sin, abs, arg, pi, unit } from 'mathjs';
-import Header from '@/components/header/Header';
-import Footer from '@/components/footer/Footer';
-import { exp } from 'mathjs';
-import { divide } from 'mathjs';
-import { i } from 'mathjs';
-import { multiply } from 'mathjs';
+import styles from './MathTools.module.scss';
 
 const ComplexPlot = () => {
     const [angleDeg, setAngleDeg] = useState(0);
@@ -38,39 +33,37 @@ const ComplexPlot = () => {
         }]);
     }, [angleDeg]);
 
-    return (<div>
-        <Header />
-        <main>
-            <section>
-                <h2>y∠c = sin(x∠θ)</h2>
-                <p>{"0° ≤ c(color hue) < 360°"}</p>
-                <br/>
+    return (
+        <section className={styles.mathSection}>
+            <h3>y∠c = sin(x∠θ)</h3>
+            <p>{"0° ≤ c(color hue) < 360°"}</p>
+            <div className={styles.sliderContainer}>
                 <label>
-                        θ (deg): {angleDeg.toFixed(1)}
-                        <input
-                            type="range"
-                            min="0"
-                            max="359.9"
-                            step="0.1"
-                            value={angleDeg}
-                            onChange={e => setAngleDeg(parseFloat(e.target.value))}
-                            style={{ width: '100%' }}
-                        />
-                    </label>
-                <div style={{ width: '90%', margin: 'auto', overflow: 'scroll'}}>
-                    <Plot
-                        data={plotData}
-                        layout={{
-                            title: 'func(x) with angle-controlled complex input',
-                            xaxis: { title: 'x' },
-                            yaxis: { title: '|func(xValue)|' },
-                        }}
+                    <span>θ (deg): {angleDeg.toFixed(1)}</span>
+                    <input
+                        type="range"
+                        min="0"
+                        max="359.9"
+                        step="0.1"
+                        value={angleDeg}
+                        onChange={e => setAngleDeg(parseFloat(e.target.value))}
                     />
-                </div>
-            </section>
-        </main>
-        <Footer/>
-    </div>
+                </label>
+            </div>
+            <div style={{ width: '100%', maxWidth: '800px', margin: 'auto', overflow: 'hidden', borderRadius: 'var(--radius-lg, 8px)' }}>
+                <Plot
+                    data={plotData}
+                    layout={{
+                        title: 'func(x) with angle-controlled complex input',
+                        xaxis: { title: 'x' },
+                        yaxis: { title: '|func(xValue)|' },
+                        autosize: true
+                    }}
+                    useResizeHandler={true}
+                    style={{ width: "100%", height: "100%" }}
+                />
+            </div>
+        </section>
     );
 };
 

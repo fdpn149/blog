@@ -18,11 +18,11 @@ $dark-shadow-color: rgba(255, 255, 255, 0.05);
 $dark-strong-shadow-color: rgba(255, 255, 255, 0.25);
 
 // New Dark Variables
-$dark-border-color: #374151;
-$dark-muted-text-color: #9ca3af;
-$dark-sidebar-bg-color: #1f2937;
-$dark-hover-bg-color: #374151;
-$dark-secondary-bg-color: #1f2937;
+$dark-border-color: #333333;
+$dark-muted-text-color: #999999;
+$dark-sidebar-bg-color: #222222;
+$dark-hover-bg-color: #333333;
+$dark-secondary-bg-color: #222222;
 
 // 共用變數（根據主題動態引用）
 $background-color: var(--background-color, $light-background-color);
