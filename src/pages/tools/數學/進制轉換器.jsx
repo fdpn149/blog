@@ -8,10 +8,16 @@ function Radix() {
     const [radixBase, setRadixBase] = useState({ re: 0, im: 0 });
     const [decimal, setDecimal] = useState({ re: 0, im: 0 });
     const [answer, setAnswer] = useState({ re: { neg: '', int: '', dec: '' }, im: { neg: '', int: '', dec: '' } });
+    const [errorMsg, setErrorMsg] = useState('');
 
     function handleButtonClicked() {
-        let ans = calculate(radixType, radixBase, decimal);
-        setAnswer(ans);
+        setErrorMsg('');
+        setAnswer({ re: { neg: '', int: '', dec: '' }, im: { neg: '', int: '', dec: '' } });
+        calculate(radixType, radixBase, decimal).then((ans) => {
+            setAnswer(ans);
+        }).catch((err) => {
+            setErrorMsg(err.message);
+        });
     }
 
     return (
@@ -29,7 +35,7 @@ function Radix() {
             <button className={styles.button} onClick={handleButtonClicked}>轉換</button>
             <h3>轉換結果</h3>
             <div className={styles.resultBox}>
-                <RadixResultDisplay value={answer} />
+                {errorMsg ? <div style={{ color: '#ff6b6b' }}>{errorMsg}</div> : <RadixResultDisplay value={answer} />}
             </div>
         </section>
     );

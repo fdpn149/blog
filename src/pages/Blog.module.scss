@@ -83,6 +83,22 @@
         &>*:not(summary) {
             padding: 0 var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
         }
+
+        details {
+            padding: 0;
+            margin-left: var(--spacing-lg);
+            margin-right: 0;
+
+            border-top-right-radius: var(--radius-lg);
+            border-bottom-right-radius: var(--radius-lg);
+            border-top-left-radius: var(--radius-lg);
+            border-bottom-left-radius: var(--radius-lg);
+
+            >summary {
+                border-top-left-radius: var(--radius-lg);
+                border-top-right-radius: var(--radius-lg);
+            }
+        }
     }
 
     img {
