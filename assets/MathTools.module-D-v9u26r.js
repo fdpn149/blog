@@ -1,0 +1,1 @@
+const t="_mathSection_1b3oj_1",o="_inputGroup_1b3oj_38",n="_input_1b3oj_38",_="_textarea_1b3oj_52",e="_button_1b3oj_83",s="_resultBox_1b3oj_108",r="_sliderContainer_1b3oj_123",i={mathSection:t,inputGroup:o,input:n,textarea:_,button:e,resultBox:s,sliderContainer:r};export{i as s};
