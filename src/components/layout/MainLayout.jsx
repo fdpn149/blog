@@ -1,24 +1,32 @@
 import React, { useState } from 'react';
 import { Menu, X, Home, BookOpen, Settings } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from './MainLayout.module.scss';
 
 const MainLayout = ({ children, sidebar }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
 
     // Determine current section for highlighting
     const isHome = location.pathname === '/';
     const isTutorials = location.pathname.startsWith('/tutorials');
 
+    const handleHomeClick = (e) => {
+        e.preventDefault();
+        navigate('/');
+        // Force the trailing slash in the URL bar for GitHub Pages compatibility
+        window.history.replaceState(null, '', import.meta.env.BASE_URL);
+    };
+
     return (
         <div className={styles.appContainer}>
             {/* Mobile Header */}
             <header className={styles.mobileHeader}>
-                <a href="/" className={styles.brandLink}>
+                <Link to="/" className={styles.brandLink} onClick={handleHomeClick}>
                     <h1 className={styles.brandTitle}>波峰小棧</h1>
                     <p className={styles.brandSubtitle}>Metro Learning Station</p>
-                </a>
+                </Link>
                 <button
                     className={styles.menuBtn}
                     onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -35,10 +43,10 @@ const MainLayout = ({ children, sidebar }) => {
                     ) : (
                         <>
                             <div className={styles.sidebarHeader}>
-                                <a href="/" className={styles.brandLink}>
+                                <Link to="/" className={styles.brandLink} onClick={handleHomeClick}>
                                     <h1 className={styles.brandTitle}>波峰小棧</h1>
                                     <p className={styles.brandSubtitle}>Metro Learning Station</p>
-                                </a>
+                                </Link>
                             </div>
 
                             <nav className={styles.navConfig}>

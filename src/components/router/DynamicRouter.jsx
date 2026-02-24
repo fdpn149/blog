@@ -1,4 +1,3 @@
-import NotFound from '@/pages/NotFound';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -49,7 +48,8 @@ export default function DynamicRouter({ props }) {
         }
         catch (error) {
             console.warn(error);
-            setContent(() => NotFound);
+            const notFoundModule = await import('@/pages/NotFound.jsx');
+            setContent(() => notFoundModule.default);
         }
         finally {
             setLoading(false);

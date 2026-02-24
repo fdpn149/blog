@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import MainLayout from './MainLayout';
 import MetroMap from '../metro/MetroMap';
 import ContentPanel from '../metro/ContentPanel';
@@ -15,6 +15,13 @@ const MetroRouteLayout = ({
 }) => {
     const navigate = useNavigate();
     const location = useLocation();
+
+    const handleHomeClick = (e) => {
+        e.preventDefault();
+        navigate('/');
+        // Force the trailing slash in the URL bar for GitHub Pages compatibility
+        window.history.replaceState(null, '', import.meta.env.BASE_URL);
+    };
 
     // Helper: Determine initial route based on URL
     const getInitialRouteId = () => {
@@ -168,10 +175,10 @@ const MetroRouteLayout = ({
     const sidebarContent = (
         <>
             <div className={styles.sidebarHeader}>
-                <a href="/" className={styles.brandLink}>
+                <Link to="/" className={styles.brandLink} onClick={handleHomeClick}>
                     <h1 className={styles.brandTitle}>波峰小棧</h1>
                     <p className={styles.brandSubtitle}>Metro Learning Station</p>
-                </a>
+                </Link>
             </div>
 
             <div style={{ padding: '1.5rem 1.5rem 0 1.5rem' }}>

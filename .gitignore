@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 src/pages/Amway/*
+
+new_diff*.txt
