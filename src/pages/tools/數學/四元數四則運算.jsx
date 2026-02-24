@@ -1,7 +1,7 @@
 import styles from "./MathTools.module.scss"
 import { useState } from "react";
 import { useTheme } from "@/hooks/useTheme";
-import { calculate } from "@/utils/QuaternionCalc";
+import { calculateQuaternion as calculate } from "@/features/quaternion";
 
 function Radix() {
     const theme = useTheme();

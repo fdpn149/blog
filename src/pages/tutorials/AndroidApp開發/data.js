@@ -2,12 +2,9 @@ import { StationType } from "@/components/metro/StationNode";
 
 export const ANDROID_COLOR = '#3DDC84'; // Green
 export const INPUT_COLOR = '#8e44ad';   // Purple
-export const KOTLIN_COLOR = '#f97316';  // Orange
-
 const CONNECTIONS = [
     { routeId: 'route-android', stationId: 'android_input', color: ANDROID_COLOR },
-    { routeId: 'route-input', stationId: 'input_hub', color: INPUT_COLOR },
-    { routeId: 'route-kotlin', stationId: 'kotlin_hub', color: KOTLIN_COLOR }
+    { routeId: 'route-input', stationId: 'input_hub', color: INPUT_COLOR }
 ];
 
 export const ANDROID_ROUTE = {
@@ -85,42 +82,8 @@ export const INPUT_ROUTE = {
     ]
 };
 
-export const KOTLIN_ROUTE = {
-    id: 'route-kotlin',
-    name: 'Kotlin 語言基礎',
-    description: 'Android 官方開發語言：現代、簡潔、安全',
-    color: KOTLIN_COLOR,
-    stations: [
-        {
-            id: 'kotlin_hub',
-            title: '語言學習轉乘站',
-            description: '連結 Android 開發與輸入法專題。',
-            type: StationType.INTERCHANGE,
-            moduleId: 'module-kotlin',
-            link: '/tutorials/AndroidApp開發/輸入法',
-            connectedRoutes: CONNECTIONS
-        },
-        {
-            id: 'kotlin_syntax',
-            title: '基礎語法',
-            description: '變數、函式與類別定義。',
-            type: StationType.NORMAL,
-            moduleId: 'module-kotlin',
-            // link: '/tutorials/Android/Kotlin/Syntax' // Placeholder
-        },
-        {
-            id: 'kotlin_null_safety',
-            title: 'Null Safety',
-            description: '告別 NullPointerException。',
-            type: StationType.TERMINUS,
-            moduleId: 'module-kotlin',
-            // link: '/tutorials/Android/Kotlin/NullSafety' // Placeholder
-        }
-    ]
-};
 
 export const ROUTES = {
     'route-android': ANDROID_ROUTE,
-    'route-input': INPUT_ROUTE,
-    'route-kotlin': KOTLIN_ROUTE
+    'route-input': INPUT_ROUTE
 };

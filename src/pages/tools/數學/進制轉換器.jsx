@@ -1,7 +1,6 @@
 import styles from "./MathTools.module.scss"
 import { useState } from "react";
-import { calculate } from "@/utils/RadixCalc";
-import { RadixTypeSel, RadixBaseInput, RadixResultDisplay } from "@/components";
+import { calculateRadix, RadixTypeSel, RadixBaseInput, RadixResultDisplay } from "@/features/radix";
 
 function Radix() {
     const [radixType, setRadixType] = useState('');
@@ -13,7 +12,7 @@ function Radix() {
     function handleButtonClicked() {
         setErrorMsg('');
         setAnswer({ re: { neg: '', int: '', dec: '' }, im: { neg: '', int: '', dec: '' } });
-        calculate(radixType, radixBase, decimal).then((ans) => {
+        calculateRadix(radixType, radixBase, decimal).then((ans) => {
             setAnswer(ans);
         }).catch((err) => {
             setErrorMsg(err.message);
