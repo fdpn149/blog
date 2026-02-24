@@ -1,1 +1,0 @@
-import{j as t,M as r}from"./index-Chn6-Wh6.js";import{c as o,S as e,G as n,C as s}from"./Stage-pyCYA4WE.js";import{CameraProvider as i}from"./Camera-DURyg4jb.js";import"./pureFunctionsAny.generated-B-T7avT7.js";function m(a){Object.assign(o,a)}m({Container:s,Graphics:n});function f(){return t.jsx(r,{children:t.jsx(i,{children:t.jsx(e,{})})})}export{f as default};
