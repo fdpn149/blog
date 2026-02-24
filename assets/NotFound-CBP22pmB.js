@@ -1,0 +1,1 @@
+import{j as r}from"./index-CP_n1Gl5.js";import{H as e}from"./Header-DQxx4q1P.js";function t(){return r.jsxs(r.Fragment,{children:[r.jsx(e,{}),r.jsx("main",{children:r.jsx("section",{children:"404"})}),r.jsx("footer",{})]})}export{t as default};
