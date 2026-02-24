@@ -168,10 +168,10 @@ const MetroRouteLayout = ({
     const sidebarContent = (
         <>
             <div className={styles.sidebarHeader}>
-                <div>
+                <a href="/" className={styles.brandLink}>
                     <h1 className={styles.brandTitle}>波峰小棧</h1>
                     <p className={styles.brandSubtitle}>Metro Learning Station</p>
-                </div>
+                </a>
             </div>
 
             <div style={{ padding: '1.5rem 1.5rem 0 1.5rem' }}>

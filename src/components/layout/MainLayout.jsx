@@ -15,7 +15,10 @@ const MainLayout = ({ children, sidebar }) => {
         <div className={styles.appContainer}>
             {/* Mobile Header */}
             <header className={styles.mobileHeader}>
-                <h1 className={styles.mobileTitle}>波峰小棧</h1>
+                <a href="/" className={styles.brandLink}>
+                    <h1 className={styles.brandTitle}>波峰小棧</h1>
+                    <p className={styles.brandSubtitle}>Metro Learning Station</p>
+                </a>
                 <button
                     className={styles.menuBtn}
                     onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -32,8 +35,10 @@ const MainLayout = ({ children, sidebar }) => {
                     ) : (
                         <>
                             <div className={styles.sidebarHeader}>
-                                <h1 className={styles.brandTitle}>波峰小棧</h1>
-                                <p className={styles.brandSubtitle}>Metro Learning Station</p>
+                                <a href="/" className={styles.brandLink}>
+                                    <h1 className={styles.brandTitle}>波峰小棧</h1>
+                                    <p className={styles.brandSubtitle}>Metro Learning Station</p>
+                                </a>
                             </div>
 
                             <nav className={styles.navConfig}>
