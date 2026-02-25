@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Plot from 'react-plotly.js';
-import { range, complex, sin, abs, arg, pi, unit } from 'mathjs';
+import { range, complex, abs, arg, pi, unit } from 'mathjs';
 import styles from './MathTools.module.scss';
+import { exp } from 'mathjs';
+import { sin } from 'mathjs';
+import { divide } from 'mathjs';
+import { tan } from 'mathjs';
+import { asin } from 'mathjs';
 
 const ComplexPlot = () => {
     const [angleDeg, setAngleDeg] = useState(0);
@@ -12,8 +17,15 @@ const ComplexPlot = () => {
 
         const angleRad = unit(angleDeg, 'deg').toNumber('rad');
         const xPolar = x.map(r => complex({ r, phi: angleRad }));
-        const yComplex = xPolar.map(z => sin(z));
-        const yAbs = yComplex.map(y => abs(y));
+        const yComplex = xPolar.map(z => z);
+        const yAbs = yComplex.map(y => {
+            const val = Number(abs(y));
+            // Filter out Infinity, NaN, or extremely large values
+            if (!Number.isFinite(val) || val > 1e6) {
+                return null;
+            }
+            return Number(val.toFixed(10));
+        });
         const phase = yComplex.map(y => {
             const p = arg(y);
             return p < 0 ? 2 * pi + p : p;
@@ -35,7 +47,7 @@ const ComplexPlot = () => {
 
     return (
         <section className={styles.mathSection}>
-            <h3>y∠c = sin(x∠θ)</h3>
+            <h3>y∠c = f(x∠θ)</h3>
             <p>{"0° ≤ c(color hue) < 360°"}</p>
             <div className={styles.sliderContainer}>
                 <label>
@@ -50,18 +62,21 @@ const ComplexPlot = () => {
                     />
                 </label>
             </div>
-            <div style={{ width: '100%', maxWidth: '800px', margin: 'auto', overflow: 'hidden', borderRadius: 'var(--radius-lg, 8px)' }}>
-                <Plot
-                    data={plotData}
-                    layout={{
-                        title: 'func(x) with angle-controlled complex input',
-                        xaxis: { title: 'x' },
-                        yaxis: { title: '|func(xValue)|' },
-                        autosize: true
-                    }}
-                    useResizeHandler={true}
-                    style={{ width: "100%", height: "100%" }}
-                />
+            <div style={{ width: '100%', margin: 'auto', overflowX: 'auto', overflowY: 'hidden', borderRadius: 'var(--radius-lg, 8px)' }}>
+                <div style={{ minWidth: '600px', height: '400px' }}>
+                    <Plot
+                        data={plotData}
+                        layout={{
+                            title: 'func(x) with angle-controlled complex input',
+                            xaxis: { title: 'x', automargin: true },
+                            yaxis: { title: '|func(xValue)|', automargin: true, rangemode: 'tozero' },
+                            autosize: true,
+                            margin: { l: 40, r: 20, t: 40, b: 40 }
+                        }}
+                        useResizeHandler={true}
+                        style={{ width: "100%", height: "100%" }}
+                    />
+                </div>
             </div>
         </section>
     );
@@ -76,7 +91,7 @@ function hsvToRgbString(h, s, v) {
     const t = v * (1 - (1 - f) * s);
     let r = 0, g = 0, b = 0;
 
-    switch (i % 6) {
+    switch (((i % 6) + 6) % 6) {
         case 0: [r, g, b] = [v, t, p]; break;
         case 1: [r, g, b] = [q, v, p]; break;
         case 2: [r, g, b] = [p, v, t]; break;
@@ -85,7 +100,7 @@ function hsvToRgbString(h, s, v) {
         case 5: [r, g, b] = [v, p, q]; break;
     }
 
-    return `rgb(${r * 255}, ${g * 255}, ${b * 255})`;
+    return `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`;
 }
 
 export default ComplexPlot;
