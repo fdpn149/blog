@@ -1,0 +1,1 @@
+import{j as t}from"./index-Bjup3e7g.js";import{M as n}from"./MainLayout-CYB4WwLE.js";function r(){return t.jsx(n,{children:t.jsxs("section",{style:{textAlign:"center",padding:"100px 20px"},children:[t.jsx("h1",{children:"404"}),t.jsx("p",{children:"Page Not Found"})]})})}export{r as default};
