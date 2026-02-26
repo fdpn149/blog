@@ -1,129 +1,131 @@
-@use '../styles/dimens' as *;
+@use "../styles/dimens" as *;
 
 .main {
-    %inside {
-        background-color: var(--sidebar-bg-color, rgba(0, 0, 0, 0.03));
-        border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
-        border-radius: var(--radius-lg, 12px);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  %inside {
+    background-color: var(--sidebar-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  p {
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--font-base);
+    line-height: var(--leading-relaxed);
+    color: var(--muted-text-color);
+    letter-spacing: 0.01em;
+  }
+
+  ul {
+    margin: var(--spacing-sm) 0 var(--spacing-lg) 1.5rem;
+
+    li {
+      margin-top: var(--spacing-xs);
+      font-size: var(--font-base);
+      line-height: var(--leading-relaxed);
+      color: var(--muted-text-color);
+    }
+  }
+
+  h2 {
+    font-size: var(--font-3xl);
+    font-weight: var(--font-extrabold);
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-color);
+    border-bottom: none;
+    padding-bottom: 0;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: var(--font-4xl);
+    }
+  }
+
+  h3 {
+    font-size: var(--font-xl);
+    font-weight: var(--font-bold);
+    color: var(--text-color);
+    margin: var(--spacing-xl) 0 var(--spacing-sm) 0;
+  }
+
+  details {
+    @extend %inside;
+    margin: var(--spacing-md) 0;
+    padding: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    > summary {
+      padding: var(--spacing-md) var(--spacing-lg);
+      cursor: pointer;
+      background-color: var(--hover-bg-color);
+      border-bottom: 1px solid transparent;
+      transition: background-color 0.2s;
+      font-weight: var(--font-medium);
+
+      &:hover {
+        background-color: var(--border-color);
+      }
+
+      > h3 {
+        display: inline;
+        margin: 0;
+        font-size: var(--font-lg);
+      }
     }
 
-    p {
-        margin-top: var(--spacing-md, 1rem);
-        margin-bottom: var(--spacing-sm, 0.5rem);
-        font-size: var(--font-base, 1rem);
-        line-height: var(--leading-relaxed, 1.75);
-        color: var(--muted-text-color, #a1a1aa);
-        letter-spacing: 0.01em;
+    &[open] > summary {
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: var(--spacing-sm);
     }
 
-    ul {
-        margin: var(--spacing-sm) 0 var(--spacing-lg) 1.5rem;
-
-        li {
-            margin-top: var(--spacing-xs, 0.25rem);
-            font-size: var(--font-base, 1rem);
-            line-height: var(--leading-relaxed, 1.75);
-            color: var(--muted-text-color, #a1a1aa);
-        }
-    }
-
-    h2 {
-        font-size: var(--font-3xl, 2rem);
-        font-weight: var(--font-extrabold, 800);
-        margin-top: 0;
-        margin-bottom: var(--spacing-md, 1rem);
-        color: var(--text-color, #fff);
-        border-bottom: none;
-        padding-bottom: 0;
-
-        @media (min-width: $breakpoint-md) {
-            font-size: var(--font-4xl, 2.25rem);
-        }
-    }
-
-    h3 {
-        font-size: var(--font-xl, 1.25rem);
-        font-weight: var(--font-bold, 700);
-        color: var(--text-color, #fff);
-        margin: var(--spacing-xl, 2rem) 0 var(--spacing-sm, 0.5rem) 0;
+    & > *:not(summary) {
+      padding: 0 var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
     }
 
     details {
-        @extend %inside;
-        margin: var(--spacing-md) 0;
-        padding: 0;
-        overflow: hidden;
-        transition: all 0.3s ease;
+      padding: 0;
+      margin-left: var(--spacing-lg);
+      margin-right: 0;
 
-        >summary {
-            padding: var(--spacing-md) var(--spacing-lg);
-            cursor: pointer;
-            background-color: var(--hover-bg-color, rgba(255, 255, 255, 0.05));
-            border-bottom: 1px solid transparent;
-            transition: background-color 0.2s;
-            font-weight: var(--font-medium);
+      border-top-right-radius: var(--radius-lg);
+      border-bottom-right-radius: var(--radius-lg);
+      border-top-left-radius: var(--radius-lg);
+      border-bottom-left-radius: var(--radius-lg);
 
-            &:hover {
-                background-color: var(--border-color, rgba(255, 255, 255, 0.08));
-            }
-
-            >h3 {
-                display: inline;
-                margin: 0;
-                font-size: var(--font-lg, 1.125rem);
-            }
-        }
-
-        &[open]>summary {
-            border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
-            margin-bottom: var(--spacing-sm);
-        }
-
-        &>*:not(summary) {
-            padding: 0 var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
-        }
-
-        details {
-            padding: 0;
-            margin-left: var(--spacing-lg);
-            margin-right: 0;
-
-            border-top-right-radius: var(--radius-lg);
-            border-bottom-right-radius: var(--radius-lg);
-            border-top-left-radius: var(--radius-lg);
-            border-bottom-left-radius: var(--radius-lg);
-
-            >summary {
-                border-top-left-radius: var(--radius-lg);
-                border-top-right-radius: var(--radius-lg);
-            }
-        }
+      > summary {
+        border-top-left-radius: var(--radius-lg);
+        border-top-right-radius: var(--radius-lg);
+      }
     }
+  }
+
+  img {
+    margin-top: var(--spacing-sm);
+  }
+
+  .dualBox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 
     img {
-        margin-top: var(--spacing-sm);
+      width: 50%;
+      padding: 0.1rem;
     }
+  }
 
+  @media screen and (max-width: #{$breakpoint-md}) {
     .dualBox {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
+      flex-direction: column;
 
-        img {
-            width: 50%;
-            padding: 0.1rem;
-        }
+      img {
+        width: fit-content;
+        max-width: 100%;
+      }
     }
-
-    @media screen and (max-width: #{$breakpoint-md}) {
-        .dualBox {
-            flex-direction: column;
-
-            img {
-                width: fit-content;
-                max-width: 100%;
-            }
-        }
-    }
+  }
 }

@@ -157,7 +157,7 @@ export default function Stage() {
         return () => cancelAnimationFrame(animationFrameId);
     }, [camera.yaw, camera.pitch]);
 
-    return <div ref={parentRef} style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: 'var(--radius-lg, 8px)' }}>
+    return <div ref={parentRef} style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: 'var(--radius-lg)' }}>
         <Application
             resizeTo={parentRef}
             backgroundColor={0x01262a}>

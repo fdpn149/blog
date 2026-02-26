@@ -25,16 +25,16 @@ $dark-hover-bg-color: #333333;
 $dark-secondary-bg-color: #222222;
 
 // 共用變數（根據主題動態引用）
-$background-color: var(--background-color, $light-background-color);
-$text-color: var(--text-color, $light-text-color);
-$shadow-color: var(--shadow-color, $light-shadow-color);
-$strong-shadow-color: var(--strong-shadow-color, $light-strong-shadow-color);
+$background-color: var(--background-color);
+$text-color: var(--text-color);
+$shadow-color: var(--shadow-color);
+$strong-shadow-color: var(--strong-shadow-color);
 
 // New Metro/Theme Variables
-$border-color: var(--border-color, #e5e7eb);
-$muted-text-color: var(--muted-text-color, #6b7280);
-$sidebar-bg-color: var(--sidebar-bg-color, #ffffff);
-$hover-bg-color: var(--hover-bg-color, #f3f4f6);
-$secondary-bg-color: var(--secondary-bg-color, #ffffff); // For cards/panels
+$border-color: var(--border-color);
+$muted-text-color: var(--muted-text-color);
+$sidebar-bg-color: var(--sidebar-bg-color);
+$hover-bg-color: var(--hover-bg-color);
+$secondary-bg-color: var(--secondary-bg-color); // For cards/panels
 
-$base-font-size: 1.2rem
+$base-font-size: 1.2rem;

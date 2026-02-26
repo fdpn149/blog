@@ -1,18 +1,16 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react';
-import { complex, abs, arg, pi, unit, pow } from 'mathjs';
+import { complex, abs, arg, pi, unit, multiply, tan, divide, cos } from 'mathjs';
 import { select } from 'd3-selection';
 import { zoom, zoomIdentity, zoomTransform } from 'd3-zoom';
 import styles from './MathTools.module.scss';
-import { exp } from 'mathjs';
-import { tan } from 'mathjs';
 
-const ComplexPlot = () => {
+const PolarComplexPlot = () => {
     const [angleDeg, setAngleDeg] = useState(0);
     const [autoScale, setAutoScale] = useState(false);
     const [fixedScale, setFixedScale] = useState(10);
     const canvasRef = useRef(null);
     const containerRef = useRef(null);
-    const [dimensions, setDimensions] = useState({ width: 600, height: 400 });
+    const [dimensions, setDimensions] = useState({ width: 600, height: 600 });
 
     // Handle responsive container
     useEffect(() => {
@@ -20,6 +18,7 @@ const ComplexPlot = () => {
         const observer = new ResizeObserver(entries => {
             if (entries[0]) {
                 const { width, height } = entries[0].contentRect;
+                // Polar plot is usually square-ish, but rect is fine
                 setDimensions({ width, height: Math.max(400, height) });
             }
         });
@@ -29,29 +28,30 @@ const ComplexPlot = () => {
 
     // Generate Points
     const chartData = useMemo(() => {
-        const angleRad = unit(angleDeg, 'deg').toNumber('rad');
+        const phiRad = unit(angleDeg, 'deg').toNumber('rad');
 
-        const evaluate = (xValue) => {
-            const z = complex({ r: xValue, phi: angleRad });
-            const y = exp(z);
-            let mag = Number(abs(y));
-            if (!Number.isFinite(mag) || mag > 1e6) {
-                mag = null;
+        const evaluate = (thetaDeg) => {
+            const thetaRad = unit(thetaDeg, 'deg').toNumber('rad');
+            const z = complex({ r: thetaRad, phi: phiRad });
+            const y = multiply(tan(z), divide(1, cos(z)));
+            let rMag = Number(abs(y));
+            if (!Number.isFinite(rMag) || rMag > 1e6) {
+                rMag = null;
             }
-            return { x: xValue, z, y, mag };
+            return { thetaDeg, z, y, rMag };
         };
 
-        const initialSteps = 1000;
-        const xMin = -10;
-        const xMax = 10;
-        const stepSize = (xMax - xMin) / initialSteps;
+        const thetaMin = 0;
+        const thetaMax = 720;
+        const initialSteps = 720; // Every 1 degree initially
+        const stepSize = (thetaMax - thetaMin) / initialSteps;
 
         let initialPoints = [];
         for (let i = 0; i <= initialSteps; i++) {
-            initialPoints.push(evaluate(xMin + i * stepSize));
+            initialPoints.push(evaluate(thetaMin + i * stepSize));
         }
 
-        const validMags = initialPoints.map(p => p.mag).filter(m => m !== null && m < 1e6);
+        const validMags = initialPoints.map(p => p.rMag).filter(m => m !== null && m < 1e6);
         validMags.sort((a, b) => a - b);
         let p95 = 10, p50 = 1, trueMax = 10, trueMin = 0;
         if (validMags.length > 0) {
@@ -61,26 +61,23 @@ const ComplexPlot = () => {
             trueMin = validMags[0];
         }
 
-        // Only clamp infinite asymptotes
         let calculatedMax = trueMax > 1000 ? Math.max(p95 * 2, p50 * 5) : trueMax;
         if (calculatedMax <= 0) calculatedMax = 1;
 
         let viewMax = autoScale ? calculatedMax : fixedScale;
 
-        let viewMin = 0;
-
         let points = [initialPoints[0]];
         const MAX_DEPTH = 14;
-        const MAG_THRESHOLD = (viewMax - viewMin) / 300;
+        const R_THRESHOLD = viewMax / 300;
         const CUTOFF_MAG = viewMax * 10;
-        const MIN_DX = (xMax - xMin) / 50000;
+        const MIN_DTHETA = (thetaMax - thetaMin) / 50000;
 
         const adaptiveSample = (p1, p2, depth) => {
             let subdivide = false;
-            const m1 = p1.mag !== null ? p1.mag : 1e6;
-            const m2 = p2.mag !== null ? p2.mag : 1e6;
+            const m1 = p1.rMag !== null ? p1.rMag : 1e6;
+            const m2 = p2.rMag !== null ? p2.rMag : 1e6;
 
-            if (depth < MAX_DEPTH && Math.abs(p2.x - p1.x) > MIN_DX) {
+            if (depth < MAX_DEPTH && Math.abs(p2.thetaDeg - p1.thetaDeg) > MIN_DTHETA) {
                 if (Math.min(m1, m2) < CUTOFF_MAG) {
                     const re1 = p1.y.re ?? (typeof p1.y === 'number' ? p1.y : 0);
                     const im1 = p1.y.im ?? 0;
@@ -88,15 +85,15 @@ const ComplexPlot = () => {
                     const im2 = p2.y.im ?? 0;
                     const dist = Math.hypot(re1 - re2, im1 - im2);
 
-                    if (dist > MAG_THRESHOLD) {
+                    if (dist > R_THRESHOLD) {
                         subdivide = true;
                     }
                 }
             }
 
             if (subdivide) {
-                const midX = (p1.x + p2.x) / 2;
-                const pMid = evaluate(midX);
+                const midTheta = (p1.thetaDeg + p2.thetaDeg) / 2;
+                const pMid = evaluate(midTheta);
                 adaptiveSample(p1, pMid, depth + 1);
                 adaptiveSample(pMid, p2, depth + 1);
             } else {
@@ -108,25 +105,29 @@ const ComplexPlot = () => {
             adaptiveSample(initialPoints[i - 1], initialPoints[i], 0);
         }
 
-        const renderCutoff = viewMax + (viewMax - viewMin) * 0.5;
+        const renderCutoff = viewMax * 1.5;
         const finalPoints = [];
         points.forEach(p => {
-            if (p.mag !== null && p.mag < renderCutoff) {
+            if (p.rMag !== null && p.rMag < renderCutoff) {
                 let pAngle = 0;
                 try {
                     const pa = arg(p.y);
                     pAngle = pa < 0 ? 2 * pi + pa : pa;
-                } catch (err) { }
+                } catch (e) { }
+
+                // Convert polar (r, theta) to cartesian (x, y) relative to center
+                const r = Number(p.rMag.toFixed(10));
+                const thetaRad = unit(p.thetaDeg, 'deg').toNumber('rad');
 
                 finalPoints.push({
-                    x: p.x,
-                    y: Number(p.mag.toFixed(10)),
+                    x: r * Math.cos(thetaRad),
+                    y: r * Math.sin(thetaRad),
                     color: hsvToRgbString(pAngle / (2 * pi), 1, 1)
                 });
             }
         });
 
-        return { points: finalPoints, viewMax, viewMin, xMin, xMax };
+        return { points: finalPoints, viewMax };
     }, [angleDeg, autoScale, fixedScale]);
 
     // Canvas Rendering & D3 Zoom
@@ -137,27 +138,94 @@ const ComplexPlot = () => {
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
         const { width, height } = dimensions;
-        const { points, viewMax, viewMin, xMin, xMax } = chartData;
+        const { points, viewMax } = chartData;
 
-        // Ensure canvas physical size matches CSS size for sharp rendering on high-DPI displays
+        // Ensure canvas physical size matches CSS size for sharp rendering
         const dpr = window.devicePixelRatio || 1;
         canvas.width = width * dpr;
         canvas.height = height * dpr;
         ctx.scale(dpr, dpr);
 
-        const yMin = viewMin;
-        const yMax = viewMax;
+        // Calculate scale to fit `viewMax * 1.2` into the smallest dimension
+        const paddingRatio = 1.2;
+        const radiusBound = viewMax * paddingRatio;
+        const minDim = Math.min(width, height);
 
-        // Add padding to data space mappings
-        const xPadding = (xMax - xMin) * 0.05;
-        const yPadding = (yMax - yMin) * 0.05;
-        const dataXMin = xMin - xPadding;
-        const dataXMax = xMax + xPadding;
-        const dataYMin = Math.max(0, yMin - yPadding);
-        const dataYMax = yMax + yPadding;
+        // Data boundaries (centered at 0,0)
+        const dataXMin = -radiusBound;
+        const dataXMax = radiusBound;
+        const dataYMin = -radiusBound;
+        const dataYMax = radiusBound;
 
-        const mapX = (x) => ((x - dataXMin) / (dataXMax - dataXMin)) * width;
-        const mapY = (y) => height - ((y - dataYMin) / (dataYMax - dataYMin)) * height;
+        // Map data X,Y to Screen X,Y, scaling proportionately
+        // Center of canvas
+        const cx = width / 2;
+        const cy = height / 2;
+        const scale = (minDim / 2) / radiusBound;
+
+        const mapX = (x) => cx + x * scale;
+        const mapY = (y) => cy - y * scale; // Invert Y
+
+        const drawGrid = (transform, textColor, borderColor) => {
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = borderColor;
+            ctx.fillStyle = textColor;
+            ctx.font = '10px sans-serif';
+
+            const center = {
+                x: transform.applyX(cx),
+                y: transform.applyY(cy)
+            };
+
+            // Calculate dynamic step for rings
+            const pixelsPerUnit = scale * transform.k;
+            const targetStep = 80 / pixelsPerUnit;
+            const power = Math.floor(Math.log10(targetStep));
+            let rStep = Math.pow(10, power);
+            if (targetStep / rStep >= 5) rStep *= 5;
+            else if (targetStep / rStep >= 2) rStep *= 2;
+
+            // Draw concentric circles
+            const maxR = viewMax * 1.5;
+            for (let rData = rStep; rData <= maxR; rData += rStep) {
+                const rScreen = rData * scale * transform.k;
+
+                ctx.beginPath();
+                ctx.arc(center.x, center.y, rScreen, 0, 2 * Math.PI);
+                ctx.stroke();
+
+                ctx.fillText(parseFloat(rData.toPrecision(3)), center.x + rScreen + 2, center.y - 2);
+            }
+
+            // Draw angle rays (every 45 degrees)
+            for (let deg = 0; deg < 360; deg += 45) {
+                const rad = deg * (Math.PI / 180);
+                const outerR = maxR; // Max length
+
+                // End point in data space
+                const xEnd = outerR * Math.cos(rad);
+                const yEnd = outerR * Math.sin(rad);
+
+                // End point in screen space
+                const px = transform.applyX(mapX(xEnd));
+                const py = transform.applyY(mapY(yEnd));
+
+                ctx.beginPath();
+                ctx.moveTo(center.x, center.y);
+                ctx.lineTo(px, py);
+                ctx.stroke();
+
+                // Add angle labels
+                const labelPx = transform.applyX(mapX(xEnd * 1.05));
+                const labelPy = transform.applyY(mapY(yEnd * 1.05));
+
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(`${deg}°`, labelPx, labelPy);
+            }
+            ctx.textAlign = 'start';
+            ctx.textBaseline = 'alphabetic';
+        };
 
         const draw = () => {
             const transform = zoomTransform(canvas);
@@ -167,112 +235,24 @@ const ComplexPlot = () => {
             // Fetch current CSS theme colors
             const computedStyle = getComputedStyle(document.body);
             const textColor = computedStyle.getPropertyValue('--text-color').trim() || '#fff';
-            const borderColor = computedStyle.getPropertyValue('--border-color').trim() || 'rgba(255, 255, 255, 0.4)';
+            // Use border color but lower opacity for faint grid lines
+            const borderColorRaw = computedStyle.getPropertyValue('--border-color').trim() || 'rgba(255, 255, 255, 0.4)';
 
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = borderColor;
+            // We can't easily parse var() or complex values universally here cleanly without a parser, 
+            // but we can trust the computed color is either rgb/rgba/#hex. 
+            // In typical globals.scss, border-color is a rgba or hex.
+            // Let's just use it directly, Canvas handles it well.
+            const borderColor = borderColorRaw;
 
-            // Compute robust responsive step sizes
-            const pixelsPerUnitX = (width / (dataXMax - dataXMin)) * transform.k;
-            const targetStepX = 80 / pixelsPerUnitX; // aim for ~80px between lines
-            let stepX = Math.pow(10, Math.floor(Math.log10(targetStepX)));
-            if (targetStepX / stepX >= 5) stepX *= 5;
-            else if (targetStepX / stepX >= 2) stepX *= 2;
-
-            const pixelsPerUnitY = (height / (dataYMax - dataYMin)) * transform.k;
-            const targetStepY = 80 / pixelsPerUnitY;
-            let stepY = Math.pow(10, Math.floor(Math.log10(targetStepY)));
-            if (targetStepY / stepY >= 5) stepY *= 5;
-            else if (targetStepY / stepY >= 2) stepY *= 2;
-
-            ctx.beginPath();
-            // Vertical Grid Lines (bounded by Y data range)
-            const yDataStart = 0;
-            const yDataEnd = viewMax * 1.5;
-            const screenYStart = Math.min(height, Math.max(0, transform.applyY(mapY(yDataEnd))));
-            const screenYEnd = Math.min(height, Math.max(0, transform.applyY(mapY(yDataStart))));
-
-            const startXData = Math.floor(xMin / stepX) * stepX;
-            for (let xPos = startXData; xPos <= xMax; xPos += stepX) {
-                const screenX = transform.applyX(mapX(xPos));
-                if (screenX >= 0 && screenX <= width) {
-                    ctx.moveTo(screenX, screenYStart);
-                    ctx.lineTo(screenX, screenYEnd);
-                }
-            }
-
-            // Horizontal Grid Lines (bounded by X data range)
-            const xDataStart = xMin;
-            const xDataEnd = xMax;
-            const screenXStart = Math.min(width, Math.max(0, transform.applyX(mapX(xDataStart))));
-            const screenXEnd = Math.min(width, Math.max(0, transform.applyX(mapX(xDataEnd))));
-
-            const startYData = Math.floor(yDataStart / stepY) * stepY;
-            for (let yPos = startYData; yPos <= yDataEnd; yPos += stepY) {
-                const screenY = transform.applyY(mapY(yPos));
-                if (screenY >= 0 && screenY <= height) {
-                    ctx.moveTo(screenXStart, screenY);
-                    ctx.lineTo(screenXEnd, screenY);
-                }
-            }
-            ctx.stroke();
-
-            // Draw primary X Axis (y=0) slightly thicker
-            const screenY0 = transform.applyY(mapY(0));
-            if (screenY0 >= 0 && screenY0 <= height) {
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.moveTo(screenXStart, screenY0);
-                ctx.lineTo(screenXEnd, screenY0);
-                ctx.stroke();
-            }
-
-            // Draw primary Y Axis (x=0) slightly thicker
-            const screenX0 = transform.applyX(mapX(0));
-            if (screenX0 >= 0 && screenX0 <= width) {
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.moveTo(screenX0, screenYStart);
-                ctx.lineTo(screenX0, screenYEnd);
-                ctx.stroke();
-            }
-
-            // Draw Labels
-            const xAxisLabelY = (screenY0 >= 0 && screenY0 <= height - 15) ? screenY0 + 4 : height - 15;
-            const yAxisLabelX = (screenX0 >= 20 && screenX0 <= width) ? screenX0 - 4 : 20;
-
-            ctx.fillStyle = textColor;
-            ctx.font = '10px sans-serif';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'top';
-            for (let xPos = startXData; xPos <= xMax; xPos += stepX) {
-                const screenX = transform.applyX(mapX(xPos));
-                if (screenX >= 10 && screenX <= width - 10) {
-                    // Prevent label overlapping the origin if both axes are visible
-                    if (Math.abs(xPos) > 1e-6 || screenY0 < 0 || screenY0 > height) {
-                        ctx.fillText(parseFloat(xPos.toPrecision(3)), screenX, xAxisLabelY);
-                    }
-                }
-            }
-
-            ctx.textAlign = 'right';
-            ctx.textBaseline = 'middle';
-            for (let yPos = startYData; yPos <= yDataEnd; yPos += stepY) {
-                const screenY = transform.applyY(mapY(yPos));
-                if (screenY >= 10 && screenY <= height - 10) {
-                    if (Math.abs(yPos) > 1e-6 || screenX0 < 0 || screenX0 > width) {
-                        ctx.fillText(parseFloat(yPos.toPrecision(3)), yAxisLabelX, screenY);
-                    }
-                }
-            }
-            ctx.textAlign = 'start';
-            ctx.textBaseline = 'alphabetic';
+            // Draw polar grid
+            drawGrid(transform, textColor, borderColor);
 
             // Draw points
             points.forEach(p => {
                 const px = transform.applyX(mapX(p.x));
                 const py = transform.applyY(mapY(p.y));
 
+                // Viewport culling
                 if (px >= -2 && px <= width + 2 && py >= -2 && py <= height + 2) {
                     ctx.fillStyle = p.color;
                     ctx.beginPath();
@@ -303,7 +283,7 @@ const ComplexPlot = () => {
 
     return (
         <section className={styles.mathSection}>
-            <h3>y∠c = f(x∠φ)</h3>
+            <h3>r∠c = f(θ∠φ)</h3>
             <p>{"0° ≤ c(color hue) < 360°"}</p>
             <div className={styles.sliderContainer}>
                 <label>
@@ -317,6 +297,7 @@ const ComplexPlot = () => {
                         onChange={e => setAngleDeg(parseFloat(e.target.value))}
                     />
                 </label>
+
                 <div className={styles.controlPanel}>
                     <label className={styles.controlLabel}>
                         <label className={styles.toggleSwitch}>
@@ -331,7 +312,7 @@ const ComplexPlot = () => {
                     </label>
                     {!autoScale && (
                         <label className={styles.controlLabel}>
-                            <span>數值範圍 (yMax):</span>
+                            <span>半徑範圍:</span>
                             <input
                                 className={`${styles.input} ${styles.fixedScaleInput}`}
                                 type="number"
@@ -359,7 +340,7 @@ const ComplexPlot = () => {
             >
                 <canvas
                     ref={canvasRef}
-                    className={`${styles.canvas} ${styles.cartesian}`}
+                    className={`${styles.canvas} ${styles.polar}`}
                 />
             </div>
         </section>
@@ -387,4 +368,4 @@ function hsvToRgbString(h, s, v) {
     return `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`;
 }
 
-export default ComplexPlot;
+export default PolarComplexPlot;

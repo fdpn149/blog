@@ -38,6 +38,14 @@ export const MATH_ROUTE = {
             type: StationType.NORMAL,
             moduleId: 'module-math',
             link: '/tools/數學/四元數四則運算'
+        },
+        {
+            id: 'math_complex_polar',
+            title: '極座標複變函數繪圖',
+            description: '在極座標系下視覺化複變函數。',
+            type: StationType.NORMAL,
+            moduleId: 'module-math',
+            link: '/tools/數學/極座標複變函數繪圖計算機'
         }
     ]
 };

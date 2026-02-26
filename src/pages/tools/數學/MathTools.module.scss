@@ -1,172 +1,357 @@
-@use '@/styles/dimens' as *;
+@use "@/styles/dimens" as *;
 
 .mathSection {
-    background-color: var(--sidebar-bg-color, rgba(255, 255, 255, 0.03));
-    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
-    border-radius: var(--radius-xl, 16px);
-    padding: var(--spacing-xl, 2rem);
-    margin: var(--spacing-lg, 1.5rem) 0;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  background-color: var(--sidebar-bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  margin: var(--spacing-lg) 0;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
 
-    h2 {
-        font-size: var(--font-3xl, 2rem);
-        font-weight: var(--font-extrabold, 800);
-        margin-top: 0;
-        margin-bottom: var(--spacing-md, 1rem);
-        color: var(--text-color, #fff);
-        border-bottom: none;
-        padding-bottom: 0;
+  h2 {
+    font-size: var(--font-3xl);
+    font-weight: var(--font-extrabold);
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-color);
+    border-bottom: none;
+    padding-bottom: 0;
 
-        @media (min-width: $breakpoint-md) {
-            font-size: var(--font-4xl, 2.25rem);
-        }
+    @media (min-width: $breakpoint-md) {
+      font-size: var(--font-4xl);
     }
+  }
 
-    h3 {
-        font-size: var(--font-xl, 1.25rem);
-        font-weight: var(--font-bold, 700);
-        color: var(--text-color, #fff);
-        margin: var(--spacing-xl, 2rem) 0 var(--spacing-md, 1rem) 0;
+  h3 {
+    font-size: var(--font-xl);
+    font-weight: var(--font-bold);
+    color: var(--text-color);
+    margin: var(--spacing-xl) 0 var(--spacing-md) 0;
 
-        &:first-child {
-            margin-top: 0;
-        }
+    &:first-child {
+      margin-top: 0;
     }
+  }
 
-    p {
-        color: var(--muted-text-color, #a1a1aa);
-        line-height: var(--leading-relaxed, 1.75);
-        font-size: var(--font-base, 1rem);
-    }
+  p {
+    color: var(--muted-text-color);
+    line-height: var(--leading-relaxed);
+    font-size: var(--font-base);
+  }
 }
 
 .inputGroup {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm, 0.5rem);
-    flex-wrap: wrap;
-    margin-bottom: var(--spacing-md, 1rem);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-md);
 
-    span {
-        color: var(--text-color, #fff);
-        font-weight: var(--font-medium, 500);
-        font-size: var(--font-lg, 1.125rem);
-    }
+  span {
+    color: var(--text-color);
+    font-weight: var(--font-medium);
+    font-size: var(--font-lg);
+  }
 }
 
 .input,
 .textarea {
-    background-color: var(--background-color, rgba(0, 0, 0, 0.2));
-    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.2));
-    border-radius: var(--radius-md, 8px);
-    color: var(--text-color, #fff);
-    padding: 0.75rem 1rem;
-    font-size: var(--font-base, 1rem);
-    font-family: var(--code-font, monospace);
-    transition: all 0.2s ease;
-    width: 100%;
-    outline: none;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-color);
+  padding: 0.75rem 1rem;
+  font-size: var(--font-base);
+  font-family: var(--code-font);
+  transition: all 0.2s ease;
+  width: 100%;
+  outline: none;
 
-    &:focus {
-        border-color: #3b82f6;
-        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
-        background-color: var(--background-color, rgba(0, 0, 0, 0.4));
-    }
+  &:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    background-color: var(--background-color);
+  }
 }
 
 .input {
-    width: auto;
-    min-width: 120px;
-    flex: 1;
+  width: auto;
+  min-width: 120px;
+  flex: 1;
 }
 
 .textarea {
-    resize: vertical;
-    min-height: 120px;
-    line-height: 1.5;
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.5;
 }
 
 .button {
-    background-color: #3b82f6; // Blue 500
-    color: white;
-    font-weight: var(--font-semibold, 600);
-    font-size: var(--font-base, 1rem);
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--radius-md, 8px);
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.4);
+  background-color: #3b82f6; // Blue 500
+  color: white;
+  font-weight: var(--font-semibold);
+  font-size: var(--font-base);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.4);
 
-    &:hover {
-        background-color: #2563eb; // Blue 600
-        box-shadow: 0 6px 8px -1px rgba(59, 130, 246, 0.5);
-        transform: translateY(-1px);
-    }
+  &:hover {
+    background-color: #2563eb; // Blue 600
+    box-shadow: 0 6px 8px -1px rgba(59, 130, 246, 0.5);
+    transform: translateY(-1px);
+  }
 
-    &:active {
-        transform: translateY(1px);
-        box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.4);
-    }
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.4);
+  }
+}
+
+.buttonSecondary {
+  background-color: transparent;
+  color: var(--text-color);
+  font-weight: var(--font-medium);
+  font-size: var(--font-base);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: var(--hover-color);
+    border-color: var(--text-color);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.resetButton {
+  background-color: transparent;
+  color: var(--text-color);
+  font-weight: var(--font-medium);
+  font-size: var(--font-sm);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  &:active {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
 }
 
 .resultBox {
-    background-color: rgba(16, 185, 129, 0.1); // Emerald tinted
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    border-radius: var(--radius-md, 8px);
-    padding: var(--spacing-lg, 1.5rem);
-    margin-top: var(--spacing-md, 1rem);
+  background-color: rgba(16, 185, 129, 0.1); // Emerald tinted
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  margin-top: var(--spacing-md);
 
-    p {
-        color: var(--text-color, #fff);
-        font-family: var(--code-font, monospace);
-        font-size: var(--font-lg, 1.125rem);
-        word-break: break-all;
-        margin: 0;
-    }
+  p {
+    color: var(--text-color);
+    font-family: var(--code-font);
+    font-size: var(--font-lg);
+    word-break: break-all;
+    margin: 0;
+  }
 }
 
 .sliderContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin: var(--spacing-lg) 0;
+
+  label {
+    color: var(--text-color);
+    font-weight: var(--font-medium);
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md, 1rem);
-    margin: var(--spacing-lg, 1.5rem) 0;
+    gap: var(--spacing-sm);
+  }
 
-    label {
-        color: var(--text-color, #fff);
-        font-weight: var(--font-medium, 500);
-        display: flex;
-        flex-direction: column;
-        gap: var(--spacing-sm, 0.5rem);
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    background: transparent;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 16px;
+      width: 16px;
+      border-radius: 50%;
+      background: var(--text-color);
+      /* background: var(--theme-color); 如果你有這個變數的話 */
+      cursor: pointer;
+      margin-top: -6px;
+      box-shadow: 0 0 10px rgba(128, 128, 128, 0.3);
+      border: 2px solid var(--background-color);
+      /* adding a border to distinct it */
     }
 
-    input[type=range] {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 100%;
-        background: transparent;
-
-        &::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            height: 16px;
-            width: 16px;
-            border-radius: 50%;
-            background: #3b82f6;
-            cursor: pointer;
-            margin-top: -6px;
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
-        }
-
-        &::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 4px;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 2px;
-        }
+    &::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 4px;
+      cursor: pointer;
+      background: var(--border-color);
+      /* 根據主題底色變換邊界顏色 */
+      border-radius: 2px;
     }
+
+    &:focus {
+      outline: none;
+
+      &::-webkit-slider-thumb {
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); // 一個輕微的focus環
+      }
+    }
+  }
+}
+
+.controlPanel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  align-items: center;
+  background: var(--sidebar-bg-color);
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  margin-top: var(--spacing-sm);
+
+  label {
+    color: var(--text-color);
+    margin: 0; // override sliderContainer label behavior
+    font-weight: var(--font-medium);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+}
+
+.controlLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+}
+
+.sliderLabelText {
+  font-size: var(--font-base);
+}
+
+.fixedScaleInput {
+  width: 100px;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  min-width: unset;
+}
+
+.alignRight {
+  margin-left: auto;
+}
+
+.canvasContainer {
+  width: 100%;
+  margin: var(--spacing-sm) auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  background: var(--background-color);
+  touch-action: none;
+  overflow: hidden;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  cursor: grab;
+
+  &.polar {
+    height: 600px;
+  }
+
+  &.cartesian {
+    height: 400px;
+  }
+}
+
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(128, 128, 128, 0.3); // track color off
+    transition: 0.3s;
+    border-radius: 24px;
+    border: 1px solid var(--border-color);
+
+    &:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      /* vertically centered since height is 24, border is 1, so inside height is 22. 22-16 = 6. top/bottom = 3 */
+      background-color: var(--text-color); // knob color
+      transition: 0.3s;
+      border-radius: 50%;
+    }
+  }
+
+  input:checked + .slider {
+    background-color: #3b82f6; // track color on
+    border-color: #3b82f6;
+
+    &:before {
+      transform: translateX(20px);
+      background-color: #ffffff; // strictly white when active for better contrast with blue
+    }
+  }
+
+  input:focus-visible + .slider {
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+  }
 }
